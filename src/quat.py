@@ -10,9 +10,9 @@ class Quat:
     def __str__(self):
         #return str(self.q)   # brzydkie
         words = []
-        labels = ["1", "i", "j", "k"]
+        labels = ["1","i","j","k"]
         words.append(str(self.q[0]))
-        for i in range(1, 4):
+        for i in range(1,4):
             if self.q[i] >= 0:
                 words.append("+")
             words.append(str(self.q[i]))
@@ -20,8 +20,6 @@ class Quat:
         return "".join(words)
 
     def __repr__(self):
-        #return "Quat(%s, %s, %s, %s)" % (
-        #self.q[0], self.q[1], self.q[2], self.q[3])
         return "Quat(%s, %s, %s, %s)" % tuple(self.q)
 
     def __eq__(self, other):
@@ -40,7 +38,8 @@ class Quat:
 
     def __neg__(self):
         """Implementacja -q."""
-        return Quat(-self.q[0], -self.q[1], -self.q[2], -self.q[3])
+        alist = [-item for item in self.q]
+        return Quat(*alist)
 
     def __add__(self, other):
         """Addition of quaternions, q+q, q+c, c+q."""
@@ -48,10 +47,8 @@ class Quat:
             other = Quat(other)
         elif isinstance(other, complex):
             other = Quat(other.real, other.imag)
-        new_quat = Quat()
-        for i in range(4):
-            new_quat.q[i] = self.q[i] + other.q[i]
-        return new_quat
+        alist = [self.q[i] + other.q[i] for i in range(4)]
+        return Quat(*alist)
 
     __radd__ = __add__
 
@@ -61,10 +58,8 @@ class Quat:
             other = Quat(other)
         elif isinstance(other, complex):
             other = Quat(other.real, other.imag)
-        new_quat = Quat()
-        for i in range(4):
-            new_quat.q[i] = self.q[i] - other.q[i]
-        return new_quat
+        alist = [self.q[i] - other.q[i] for i in range(4)]
+        return Quat(*alist)
 
     def __rsub__(self, other):
         """Subtraction of quaternions, c-q."""
@@ -72,10 +67,8 @@ class Quat:
             other = Quat(other)
         elif isinstance(other, complex):
             other = Quat(other.real, other.imag)
-        new_quat = Quat()
-        for i in range(4):
-            new_quat.q[i] = other.q[i] - self.q[i]
-        return new_quat
+        alist = [other.q[i] - self.q[i] for i in range(4)]
+        return Quat(*alist)
 
     def __mul__(self, other):
         """Quaternion product, quat*quat, quat*complex."""
@@ -120,8 +113,8 @@ class Quat:
 
     def __invert__(self):   # ~p, zwraca p^{-1}
         """Reciprocal of quaternion."""
-        tmp = 1./abs(self)
-        return (tmp * tmp) * self.conjugate()
+        powers = sum(item * item for item in self.q)
+        return (1.0 / powers) * self.conjugate()
 
     def __pow__(self, n):
         new_quat = Quat(1)
@@ -169,9 +162,9 @@ def rotate2(vector, theta, rot_vec):
 
 # chce zbudowac obrot z katow Eulera
 def rotate3(vector, phi, theta, psi):
-    q1 = Quat.rot_quat(phi, [0,0,1])
-    q2 = Quat.rot_quat(theta, [0,1,0])
-    q3 = Quat.rot_quat(psi, [0,0,1])
+    q1 = Quat.rot_quat(phi, [0, 0, 1])
+    q2 = Quat.rot_quat(theta, [0, 1, 0])
+    q3 = Quat.rot_quat(psi, [0, 0, 1])
     rot_quat = q1 * q2 * q3
     return rotate1(vector, rot_quat)
 
