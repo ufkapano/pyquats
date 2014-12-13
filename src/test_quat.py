@@ -15,13 +15,16 @@ class TestQuat(unittest.TestCase):
         self.q1 = Quat(1, 2, 3, 4)
         self.q2 = Quat(1, 1, 1, 1)
         self.q3 = Quat(1.1, 2.2, 3.3, 4.4)
+        self.q4 = Quat(-1.2, -2.3, -3.4, -4.5)
         self.c1 = 1J
         self.c2 = 1 + 2J
 
     def test_print(self):
         self.assertEqual(str(self.zero),"0.0+0.0i+0.0j+0.0k")
+        self.assertEqual(str(self.q4),"-1.2-2.3i-3.4j-4.5k")
         self.assertEqual(repr(self.zero),"Quat(0.0, 0.0, 0.0, 0.0)")
         self.assertEqual(repr(self.q1),"Quat(1.0, 2.0, 3.0, 4.0)")
+        self.assertEqual(repr(self.q4),"Quat(-1.2, -2.3, -3.4, -4.5)")
 
     def test_add(self):
         self.assertEqual(self.q1 + self.q2, Quat(2, 3, 4, 5))
@@ -39,9 +42,9 @@ class TestQuat(unittest.TestCase):
         # i*j=k, i*1=j*j=k*k=-1
         self.assertEqual(self.ii * self.jj, self.kk)
         self.assertEqual(self.jj * self.ii, Quat(0, 0, 0, -1))
-        self.assertEqual(self.ii * self.ii, -1)
-        self.assertEqual(self.jj * self.jj, -1)
-        self.assertEqual(self.kk * self.kk, -1)
+        self.assertEqual(self.ii * self.ii, Quat(-1))
+        self.assertEqual(self.jj * self.jj, Quat(-1))
+        self.assertEqual(self.kk * self.kk, Quat(-1))
         # test complex
         self.assertEqual(self.c2 * Quat(3, 4), Quat(3, 4) * self.c2)
         self.assertEqual(self.q1 * self.c2, Quat(-3, 4, 11, -2))
@@ -72,7 +75,8 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(self.q1 ** 0, 1)
         self.assertEqual(self.q1 ** 1, self.q1)
         self.assertEqual(self.q1 ** 2, self.q1 * self.q1)
-        self.assertEqual(self.ii ** 4, 1)
+        self.assertEqual(self.ii ** 4, self.one)
+        self.assertEqual(self.ii ** 400, self.one)
 
     def test_conversion(self):
         self.assertRaises(TypeError, int, self.one)
@@ -139,10 +143,10 @@ class TestRotations(unittest.TestCase):
 
 if __name__== "__main__":
 
-    #unittest.main()     # wlacza wszystkie testy
+    #unittest.main()
     suite1 = unittest.TestLoader().loadTestsFromTestCase(TestQuat)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestRotations)
-    suite = unittest.TestSuite([suite1, suite2])      # wybrany zestaw
+    suite = unittest.TestSuite([suite1, suite2])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF

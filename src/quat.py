@@ -82,13 +82,13 @@ class Quat:
         """Quaternion product, complex*quat."""
         other = self._normalize(other)
         a = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
-        - other.q[2] * self.q[2] - other.q[3] * self.q[3])
+            - other.q[2] * self.q[2] - other.q[3] * self.q[3])
         b = (other.q[0] * self.q[1] + other.q[1] * self.q[0]
-        + other.q[2] * self.q[3] - other.q[3] * self.q[2])
+            + other.q[2] * self.q[3] - other.q[3] * self.q[2])
         c = (other.q[0] * self.q[2] - other.q[1] * self.q[3]
-        + other.q[2] * self.q[0] + other.q[3] * self.q[1])
+            + other.q[2] * self.q[0] + other.q[3] * self.q[1])
         d = (other.q[0] * self.q[3] + other.q[1] * self.q[2]
-        - other.q[2] * self.q[1] + other.q[3] * self.q[0])
+            - other.q[2] * self.q[1] + other.q[3] * self.q[0])
         return Quat(a, b, c, d)
 
     def __abs__(self):
@@ -105,17 +105,46 @@ class Quat:
         powers = sum(item * item for item in self.q)
         return (1.0 / powers) * self.conjugate()
 
-    def __pow__(self, n):
-        new_quat = Quat(1)
+    def pow1(self, n):
+        """Find powers of the perm (inefficient)."""
+        quat = Quat(1)
         while n > 0:
-            new_quat = new_quat * self
-            n = n-1
-        return new_quat
+            quat = quat * self
+            n = n - 1
+        return quat
+
+    def pow2(self, n):
+        """Find powers of the perm (binary exponentiation)."""
+        if n == 0:
+            return Quat(1)
+        if n < 0:
+            return pow(~self, -n)
+        quat = self
+        if n == 1:
+            return self
+        elif n == 2:
+            return self * self
+        else:   # binary exponentiation
+            result = Quat(1)
+            while True:
+                if n % 2 == 1:
+                    result = result * quat
+                    n = n - 1  # przez ile pomnozyc
+                    if n == 0:
+                        break
+                if n % 2 == 0:
+                    quat = quat * quat
+                    n = n / 2
+        return result
+
+    __pow__ = pow1
 
     def __int__(self):
+        """Conversion to int is nat possible."""
         raise TypeError("can't convert quat to int")
 
     def __float__(self):
+        """Conversion to float is nat possible."""
         raise TypeError("can't convert quat to float")
 
     # method used to create a rotation Quaternion to rotate
