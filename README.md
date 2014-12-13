@@ -1,1 +1,6 @@
-# This is my README.
+py-quats
+========
+
+Python implementation of quaternions is presented. 
+
+EOF
