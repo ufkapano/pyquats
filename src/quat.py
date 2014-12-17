@@ -3,11 +3,14 @@
 import math
 
 class Quat:
+    """The class defining a quaternion."""
 
     def __init__(self, a=0, b=0, c=0, d=0):
+        """Load up a Quat instance."""
         self.q = [float(a), float(b), float(c), float(d)]
 
     def __str__(self):
+        """Compute the string (informal) representation of the quaternion."""
         #return str(self.q)   # brzydkie
         words = []
         labels = ["1", "i", "j", "k"]
@@ -20,9 +23,11 @@ class Quat:
         return "".join(words)
 
     def __repr__(self):
+        """Compute the string (formal) representation of the quaternion."""
         return "Quat(%s, %s, %s, %s)" % tuple(self.q)
 
     def _normalize(self, other):
+        """Transformation to a quaternion."""
         if isinstance(other, (int, long, float)):
             other = Quat(other)
         elif isinstance(other, complex):
@@ -30,23 +35,25 @@ class Quat:
         return other
 
     def __eq__(self, other):
+        """Test if the quaternions are equal."""
         other = self._normalize(other)
         return all(self.q[i] == other.q[i] for i in range(4))
 
     def __ne__(self, other):
+        """Test if the quaternions are not equal."""
         return not self == other
 
     def __pos__(self):
-        """Implementacja +q."""
+        """Implementation of +q."""
         return self
 
     def __neg__(self):
-        """Implementacja -q."""
+        """Implementation of -q."""
         alist = [-item for item in self.q]
         return Quat(*alist)
 
     def __add__(self, other):
-        """Addition of quaternions, q+q, q+c, c+q."""
+        """Addition of quaternions."""
         other = self._normalize(other)
         alist = [self.q[i] + other.q[i] for i in range(4)]
         return Quat(*alist)
@@ -54,19 +61,19 @@ class Quat:
     __radd__ = __add__
 
     def __sub__(self, other):
-        """Subtraction of quaternions, q-q, q-c."""
+        """Subtraction of quaternions."""
         other = self._normalize(other)
         alist = [self.q[i] - other.q[i] for i in range(4)]
         return Quat(*alist)
 
     def __rsub__(self, other):
-        """Subtraction of quaternions, c-q."""
+        """Subtraction of quaternions."""
         other = self._normalize(other)
         alist = [other.q[i] - self.q[i] for i in range(4)]
         return Quat(*alist)
 
     def __mul__(self, other):
-        """Quaternion product, quat*quat, quat*complex."""
+        """Quaternion product."""
         other = self._normalize(other)
         a = (self.q[0] * other.q[0] - self.q[1] * other.q[1]
             - self.q[2] * other.q[2] - self.q[3] * other.q[3])
@@ -79,7 +86,7 @@ class Quat:
         return Quat(a, b, c, d)
 
     def __rmul__(self, other):
-        """Quaternion product, complex*quat."""
+        """Quaternion product."""
         other = self._normalize(other)
         a = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
             - other.q[2] * self.q[2] - other.q[3] * self.q[3])
@@ -92,29 +99,29 @@ class Quat:
         return Quat(a, b, c, d)
 
     def __abs__(self):
-        """Norm of a quaternion returns an scalar."""
+        """Return the norm of a quaternion (a scalar)."""
         powers = sum(item * item for item in self.q)
         return math.sqrt(powers)
 
-    def conjugate(self):   # tworzy nowy quat
-        """Conjugates a quaternion."""
+    def conjugate(self):
+        """Conjugate the quaternion."""
         return Quat(self.q[0], -self.q[1], -self.q[2], -self.q[3])
 
     def __invert__(self):   # ~p, zwraca p^{-1}
-        """Reciprocal of quaternion."""
+        """Reciprocal of the quaternion."""
         powers = sum(item * item for item in self.q)
         return (1.0 / powers) * self.conjugate()
 
-    def pow1(self, n):
-        """Find powers of the perm (inefficient)."""
+    def _pow1(self, n):
+        """Find powers of the quaternion (inefficient)."""
         quat = Quat(1)
         while n > 0:
             quat = quat * self
             n = n - 1
         return quat
 
-    def pow2(self, n):
-        """Find powers of the perm (binary exponentiation)."""
+    def _pow2(self, n):
+        """Find powers of the quaternion (binary exponentiation)."""
         if n == 0:
             return Quat(1)
         if n < 0:
@@ -137,14 +144,14 @@ class Quat:
                     n = n / 2
         return result
 
-    __pow__ = pow1
+    __pow__ = _pow1
 
     def __int__(self):
-        """Conversion to int is nat possible."""
+        """Conversion to int is not possible."""
         raise TypeError("can't convert quat to int")
 
     def __float__(self):
-        """Conversion to float is nat possible."""
+        """Conversion to float is not possible."""
         raise TypeError("can't convert quat to float")
 
     # method used to create a rotation Quaternion to rotate
