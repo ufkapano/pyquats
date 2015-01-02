@@ -2,6 +2,7 @@
 
 import math
 
+
 class Quat:
     """The class defining a quaternion."""
 
@@ -114,6 +115,8 @@ class Quat:
 
     def _pow1(self, n):
         """Find powers of the quaternion (inefficient)."""
+        if n < 0:
+            return pow(~self, -n)
         quat = Quat(1)
         while n > 0:
             quat = quat * self

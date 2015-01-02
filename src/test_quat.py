@@ -4,6 +4,7 @@ import math
 import unittest
 from quat import *
 
+
 class TestQuat(unittest.TestCase):
 
     def setUp(self):
