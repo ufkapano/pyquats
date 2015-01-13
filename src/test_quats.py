@@ -2,7 +2,7 @@
 
 import math
 import unittest
-from quat import *
+from quats import *
 
 
 class TestQuat(unittest.TestCase):

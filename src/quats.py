@@ -169,6 +169,8 @@ class Quat:
         d = rot_vec[2] * math.sin(theta / 2.0)
         return cls(a, b, c, d)
 
+Quaternion = Quat
+
 # rotates a vector or a vector defined as a Quaternion 0+xi+yj+zk 
 # with respect to a Quaternion;
 # vector jest z R^3, wynik tez jest z R^3, rot_quat jest jednostkowy.
