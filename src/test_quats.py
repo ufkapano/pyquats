@@ -54,6 +54,10 @@ class TestQuat(unittest.TestCase):
     def test_pos_neg(self):
         self.assertEqual(+self.q1, self.q1)
         self.assertEqual(-self.q1, Quat(-1, -2, -3, -4))
+        self.assertEqual(self.jj * self.ii, -self.kk)
+        self.assertEqual(self.ii * self.ii, -self.one)
+        self.assertEqual(self.jj * self.jj, -self.one)
+        self.assertEqual(self.kk * self.kk, -self.one)
 
     def test_conjugate(self):
         self.assertEqual(self.q1.conjugate(), Quat(1, -2, -3, -4))

@@ -50,6 +50,8 @@ class Quat:
 
     def __neg__(self):
         """Implementation of -q."""
+        #alist = [-item for item in self.q]
+        #return Quat(*alist)
         return Quat(-self.q[0], -self.q[1], -self.q[2], -self.q[3])
 
     def __add__(self, other):
