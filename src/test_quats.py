@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import math
 import unittest
+import math
 from quats import *
 
 
