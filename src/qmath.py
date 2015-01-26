@@ -10,9 +10,8 @@ def exp(x):
         return Quat(math.exp(x))
     elif isinstance(x, complex):
         # exp(a+bJ)=exp(a)*(cos(b)+sin(b)J)
-        a = math.exp(x.real) * math.cos(x.imag)
-        b = math.exp(x.real) * math.sin(x.imag)
-        return Quat(a, b)
+        exp_real = math.exp(x.real)
+        return Quat(exp_real * math.cos(x.imag), exp_real * math.sin(x.imag))
     else:   # isinstance(x, Quat)
         quat_imag = Quat(0, x.q[1], x.q[2], x.q[3])
         v = abs(quat_imag)

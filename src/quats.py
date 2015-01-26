@@ -165,10 +165,13 @@ class Quat:
     # Chyba lepiej zrobic metode klasy.
     @classmethod
     def rot_quat(cls, theta, rot_vec):
+        if math.sqrt(rot_vec[0]**2 + rot_vec[1]**2 + rot_vec[2]**2) != 1.0:
+            raise ValueError("not a unit vector")
         a = math.cos(theta / 2.0)
-        b = rot_vec[0] * math.sin(theta / 2.0)
-        c = rot_vec[1] * math.sin(theta / 2.0)
-        d = rot_vec[2] * math.sin(theta / 2.0)
+        sin_t = math.sin(theta / 2.0)
+        b = rot_vec[0] * sin_t
+        c = rot_vec[1] * sin_t
+        d = rot_vec[2] * sin_t
         return cls(a, b, c, d)
 
 Quaternion = Quat
