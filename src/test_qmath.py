@@ -29,6 +29,24 @@ class TestQuatMath(unittest.TestCase):
         self.assertAlmostEqual(qmath.exp(Quat(2, 0, 0, 3)),
             math.exp(2) * Quat(math.cos(3), 0, 0, math.sin(3)))
 
+    def test_sin(self):
+        self.assertAlmostEqual(qmath.sin(2), math.sin(2))
+        self.assertAlmostEqual(qmath.sin(self.c1), cmath.sin(self.c1))
+        self.assertAlmostEqual(qmath.sin(self.c2), cmath.sin(self.c2))
+        self.assertAlmostEqual(qmath.sin(Quat(2)), math.sin(2))
+        self.assertAlmostEqual(qmath.sin(Quat(0, 3)), cmath.sin(3J))
+        self.assertAlmostEqual(qmath.sin(Quat(4, 5)), cmath.sin(4 + 5J))
+        self.assertAlmostEqual(qmath.sin(Quat(0, 3)), Quat(0, math.sinh(3)))
+
+    def test_cos(self):
+        self.assertAlmostEqual(qmath.cos(2), math.cos(2))
+        self.assertAlmostEqual(qmath.cos(self.c1), cmath.cos(self.c1))
+        self.assertAlmostEqual(qmath.cos(self.c2), cmath.cos(self.c2))
+        self.assertAlmostEqual(qmath.cos(Quat(2)), math.cos(2))
+        self.assertAlmostEqual(qmath.cos(Quat(0, 3)), cmath.cos(3J))
+        self.assertAlmostEqual(qmath.cos(Quat(4, 5)), cmath.cos(4 + 5J))
+        self.assertAlmostEqual(qmath.cos(Quat(0, 3)), Quat(math.cosh(3)))
+
     def tearDown(self): pass
 
 if __name__== "__main__":
