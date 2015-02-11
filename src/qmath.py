@@ -25,6 +25,7 @@ def exp(x):
         result = result * math.exp(x.q[0])
         return result
 
+
 def sin(x):
     """Return the sine of x."""
     if isinstance(x, (int, long, float)):
@@ -46,11 +47,39 @@ def cos(x):
         return Quat(math.cos(x))
     elif isinstance(x, complex):
         return Quat(math.cos(x.real) * math.cosh(x.imag), 
-                    -math.sin(x.real) * math.sinh(x.imag))
+                   -math.sin(x.real) * math.sinh(x.imag))
     else:   # isinstance(x, Quat)
         # cos(q)=(exp(qJ)+exp(-qJ))/2
         quat = x * Quat(0, 1)
         result = exp(quat) + exp(-quat)
+        result = result * Quat(0.5)
+        return result
+
+
+def sinh(x):
+    """Return the hyperbolic sine of x."""
+    if isinstance(x, (int, long, float)):
+        return Quat(math.sinh(x))
+    elif isinstance(x, complex):
+        return Quat(math.sinh(x.real) * math.cos(x.imag), 
+                    math.cosh(x.real) * math.sin(x.imag))
+    else:   # isinstance(x, Quat)
+        # sin(q)=(exp(q)-exp(-q))/2
+        result = exp(x) - exp(-x)
+        result = result * Quat(0.5)
+        return result
+
+
+def cosh(x):
+    """Return the hyperbolic cosine of x."""
+    if isinstance(x, (int, long, float)):
+        return Quat(math.cosh(x))
+    elif isinstance(x, complex):
+        return Quat(math.cosh(x.real) * math.cos(x.imag), 
+                    math.sinh(x.real) * math.sin(x.imag))
+    else:   # isinstance(x, Quat)
+        # cos(q)=(exp(q)+exp(-q))/2
+        result = exp(x) + exp(-x)
         result = result * Quat(0.5)
         return result
 
