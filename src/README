@@ -1,0 +1,6 @@
+quats.py - This module provides class Quat.
+
+qmath.py - This module provides access to mathematical
+    functions for quaternions.
+
+EOF

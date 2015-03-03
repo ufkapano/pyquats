@@ -7,7 +7,7 @@ class Quat:
     """The class defining a quaternion."""
 
     def __init__(self, a=0, b=0, c=0, d=0):
-        """Load up a Quat instance."""
+        """Create a Quat instance."""
         self.q = [float(a), float(b), float(c), float(d)]
 
     def __str__(self):
@@ -148,7 +148,7 @@ class Quat:
                     n = n / 2
         return result
 
-    __pow__ = _pow1
+    __pow__ = _pow2
 
     def __int__(self):
         """Conversion to int is not possible."""
@@ -168,10 +168,10 @@ class Quat:
         if math.sqrt(rot_vec[0]**2 + rot_vec[1]**2 + rot_vec[2]**2) != 1.0:
             raise ValueError("not a unit vector")
         a = math.cos(theta / 2.0)
-        sin_t = math.sin(theta / 2.0)
-        b = rot_vec[0] * sin_t
-        c = rot_vec[1] * sin_t
-        d = rot_vec[2] * sin_t
+        sinus = math.sin(theta / 2.0)
+        b = rot_vec[0] * sinus
+        c = rot_vec[1] * sinus
+        d = rot_vec[2] * sinus
         return cls(a, b, c, d)
 
 Quaternion = Quat

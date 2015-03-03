@@ -12,7 +12,7 @@ class TestQuatMath(unittest.TestCase):
     def setUp(self):
         self.f1 = 3.0
         self.f2 = 4.0
-        self.c1 = 1J
+        self.c1 = 3J
         self.c2 = 1 + 2J
 
     def test_exp(self):
@@ -29,6 +29,11 @@ class TestQuatMath(unittest.TestCase):
             math.exp(self.f1) * Quat(math.cos(self.f2), 0, math.sin(self.f2)))
         self.assertAlmostEqual(qmath.exp(Quat(self.f1, 0, 0, self.f2)),
             math.exp(self.f1) * Quat(math.cos(self.f2), 0, 0, math.sin(self.f2)))
+
+    def test_log(self):
+        self.assertAlmostEqual(qmath.log(self.f1), math.log(self.f1))
+        self.assertAlmostEqual(qmath.log(self.c1), cmath.log(self.c1))
+        self.assertAlmostEqual(qmath.log(self.c2), cmath.log(self.c2))
 
     def test_sin(self):
         self.assertAlmostEqual(qmath.sin(self.f1), math.sin(self.f1))

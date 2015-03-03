@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import math
+import cmath
 from quats import Quat
 
 
@@ -12,6 +13,7 @@ def exp(x):
         # exp(a+bJ)=exp(a)*(cos(b)+sin(b)J)
         exp_real = math.exp(x.real)
         return Quat(exp_real * math.cos(x.imag), exp_real * math.sin(x.imag))
+        #return Quat(1) * cmath.exp(x)
     else:   # isinstance(x, Quat)
         quat_imag = Quat(0, x.q[1], x.q[2], x.q[3])
         v = abs(quat_imag)
@@ -26,11 +28,22 @@ def exp(x):
         return result
 
 
+def log(x):
+    """Return the natural logarithm (base e) of x."""
+    if isinstance(x, (int, long, float)):
+        return Quat(math.log(x))
+    elif isinstance(x, complex):
+        return Quat(1) * cmath.log(x)
+    else:   # isinstance(x, Quat)
+        pass
+
+
 def sin(x):
     """Return the sine of x."""
     if isinstance(x, (int, long, float)):
         return Quat(math.sin(x))
     elif isinstance(x, complex):
+        #return Quat(1) * cmath.sin(x)
         return Quat(math.sin(x.real) * math.cosh(x.imag), 
                     math.cos(x.real) * math.sinh(x.imag))
     else:   # isinstance(x, Quat)
@@ -46,6 +59,7 @@ def cos(x):
     if isinstance(x, (int, long, float)):
         return Quat(math.cos(x))
     elif isinstance(x, complex):
+        #return Quat(1) * cmath.cos(x)
         return Quat(math.cos(x.real) * math.cosh(x.imag), 
                    -math.sin(x.real) * math.sinh(x.imag))
     else:   # isinstance(x, Quat)
@@ -61,6 +75,7 @@ def sinh(x):
     if isinstance(x, (int, long, float)):
         return Quat(math.sinh(x))
     elif isinstance(x, complex):
+        #return Quat(1) * cmath.sinh(x)
         return Quat(math.sinh(x.real) * math.cos(x.imag), 
                     math.cosh(x.real) * math.sin(x.imag))
     else:   # isinstance(x, Quat)
@@ -75,6 +90,7 @@ def cosh(x):
     if isinstance(x, (int, long, float)):
         return Quat(math.cosh(x))
     elif isinstance(x, complex):
+        #return Quat(1) * cmath.cosh(x)
         return Quat(math.cosh(x.real) * math.cos(x.imag), 
                     math.sinh(x.real) * math.sin(x.imag))
     else:   # isinstance(x, Quat)
