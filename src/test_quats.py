@@ -122,19 +122,19 @@ class TestRotations(unittest.TestCase):
         self.assertAlmostEqual(self.rotY90 * self.rotX90, Quat(0.5, 0.5, 0.5, -0.5))
         self.assertAlmostEqual(self.rotZ90 * self.rotY90, Quat(0.5, -0.5, 0.5, 0.5))
         self.assertAlmostEqual(self.rotX90 * self.rotZ90, Quat(0.5, 0.5, -0.5, 0.5))
-        self.assertAlmostEqual(self.rotX90, Quat.rot_quat(math.pi * 0.5, [1, 0, 0]))
-        self.assertAlmostEqual(self.rotY90, Quat.rot_quat(math.pi * 0.5, [0, 1, 0]))
-        self.assertAlmostEqual(self.rotZ90, Quat.rot_quat(math.pi * 0.5, [0, 0, 1]))
-        self.assertAlmostEqual(self.rot120, Quat.rot_quat(math.pi * 2.0 / 3.0, self.vec1))
+        self.assertAlmostEqual(self.rotX90, Quat.rot_quat([1, 0, 0], math.pi * 0.5))
+        self.assertAlmostEqual(self.rotY90, Quat.rot_quat([0, 1, 0], math.pi * 0.5))
+        self.assertAlmostEqual(self.rotZ90, Quat.rot_quat([0, 0, 1], math.pi * 0.5))
+        self.assertAlmostEqual(self.rot120, Quat.rot_quat(self.vec1, math.pi * 2.0 / 3.0))
 
     def test_rot_vectors(self):
         # Listy nie mozna odejmowac i obliczac abs(L).
         # Potrzebna klasa Vector.
         pairs = []
         pairs.append((rotate1([10, 0, 0], self.rotZ90), [0, 10, 0]))
-        pairs.append((rotate2([10, 0, 0], math.pi * 0.5, [0, 0, 1]), [0, 10, 0]))
+        pairs.append((rotate2([10, 0, 0], [0, 0, 1], math.pi * 0.5), [0, 10, 0]))
         pairs.append((rotate1([0,10, 0], self.rot120), [0, 0, 10]))
-        pairs.append((rotate2([0, 10, 0], math.pi * 2.0 / 3.0, self.vec1), [0, 0, 10]))
+        pairs.append((rotate2([0, 10, 0], self.vec1, math.pi * 2.0 / 3.0), [0, 0, 10]))
         pairs.append((rotate3([0, 0, 10], 0, math.pi * 0.5, 0), [10, 0, 0]))
         pairs.append((rotate3([10, 0, 0], math.pi * 0.5, 0, 0), [0, 10, 0]))
         pairs.append((rotate3([10, 0, 0], math.pi * 0.5, 0, 0), [0, 10, 0]))

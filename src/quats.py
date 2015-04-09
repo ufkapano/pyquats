@@ -164,14 +164,16 @@ class Quat:
     # rot_vec ma dlugosc 1 w R^3, tworzymy kwaternion jednostkowy.
     # Chyba lepiej zrobic metode klasy.
     @classmethod
-    def rot_quat(cls, theta, rot_vec):
-        if math.sqrt(rot_vec[0]**2 + rot_vec[1]**2 + rot_vec[2]**2) != 1.0:
+    def rot_quat(cls, axis, angle):
+        """From the axis-angle representation to the quat.
+        The angle is in radians. The axis is"""
+        if sum(x * x for x in axis) != 1.0:
             raise ValueError("not a unit vector")
-        a = math.cos(theta / 2.0)
-        sinus = math.sin(theta / 2.0)
-        b = rot_vec[0] * sinus
-        c = rot_vec[1] * sinus
-        d = rot_vec[2] * sinus
+        a = math.cos(angle / 2.0)
+        sinus = math.sin(angle / 2.0)
+        b = axis[0] * sinus
+        c = axis[1] * sinus
+        d = axis[2] * sinus
         return cls(a, b, c, d)
 
 Quaternion = Quat
@@ -189,18 +191,17 @@ def rotate1(vector, rot_quat):
 
 # rotates a vector v_to_rotate theta 'radians' with respect to v_about,
 # both are vectors but it uses Quaternions
-def rotate2(vector, theta, rot_vec):
+def rotate2(vector, axis, angle):
     # tworze kwaternion jednostkowy dla obrotu
-    rot_quat = Quat.rot_quat(theta, rot_vec)
+    rot_quat = Quat.rot_quat(axis, angle)
     return rotate1(vector, rot_quat)
 
 # chce zbudowac obrot z katow Eulera
 def rotate3(vector, phi, theta, psi):
-    q1 = Quat.rot_quat(phi, [0, 0, 1])
-    q2 = Quat.rot_quat(theta, [0, 1, 0])
-    q3 = Quat.rot_quat(psi, [0, 0, 1])
+    q1 = Quat.rot_quat([0, 0, 1], phi)
+    q2 = Quat.rot_quat([0, 1, 0], theta)
+    q3 = Quat.rot_quat([0, 0, 1], psi)
     rot_quat = q1 * q2 * q3
     return rotate1(vector, rot_quat)
-
 
 # EOF
