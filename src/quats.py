@@ -25,7 +25,8 @@ class Quat:
 
     def __repr__(self):
         """Compute the string (formal) representation of the quaternion."""
-        return "Quat(%s, %s, %s, %s)" % tuple(self.q)
+        return "Quat({}, {}, {}, {})".format(*self.q)
+        #return "Quat(%s, %s, %s, %s)" % tuple(self.q)
 
     def _normalize(self, other):
         """Transformation to a quaternion."""
@@ -64,12 +65,14 @@ class Quat:
 
     def __sub__(self, other):
         """Subtraction of quaternions."""
+        # return self + (-other)
         other = self._normalize(other)
         alist = [self.q[i] - other.q[i] for i in range(4)]
         return Quat(*alist)
 
     def __rsub__(self, other):
         """Subtraction of quaternions."""
+        # return (-self) + other
         other = self._normalize(other)
         alist = [other.q[i] - self.q[i] for i in range(4)]
         return Quat(*alist)
