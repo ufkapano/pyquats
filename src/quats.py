@@ -47,6 +47,7 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
+        #print "__nonzero__"
         return any(self.q[i] != 0 for i in range(4))
 
     def __pos__(self):
@@ -164,6 +165,10 @@ class Quat:
     def __int__(self):
         """Conversion to int is not possible."""
         raise TypeError("can't convert quat to int")
+
+    def __long__(self):
+        """Conversion to long is not possible."""
+        raise TypeError("can't convert quat to long")
 
     def __float__(self):
         """Conversion to float is not possible."""

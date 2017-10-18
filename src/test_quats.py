@@ -52,6 +52,8 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(self.c2 * self.q1, Quat(-3, 4, -5, 10))
 
     def test_nonzero(self):
+        self.assertTrue(bool(Quat(1)))
+        self.assertFalse(bool(Quat()))
         self.assertEqual("a", "a" if Quat(1) else "b")
         self.assertEqual("b", "a" if Quat() else "b")
 
@@ -91,6 +93,7 @@ class TestQuat(unittest.TestCase):
         self.assertRaises(TypeError, int, self.one)
         self.assertRaises(TypeError, long, self.one)
         self.assertRaises(TypeError, float, self.one)
+        self.assertRaises(TypeError, complex, self.one)
 
     def test_hash(self):
         aset = set()
