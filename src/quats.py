@@ -45,6 +45,10 @@ class Quat:
         """Test if the quaternions are not equal."""
         return not self == other
 
+    def __nonzero__(self):
+        """Test if the quaternion is not equal to zero."""
+        return any(self.q[i] != 0 for i in range(4))
+
     def __pos__(self):
         """Implementation of +q."""
         return self
@@ -169,7 +173,7 @@ class Quat:
     @classmethod
     def rot_quat(cls, axis, angle):
         """From the axis-angle representation to the quat.
-        The angle is in radians. The axis is"""
+        The angle is in radians. The axis is a unit vector 3D."""
         if sum(x * x for x in axis) != 1.0:
             raise ValueError("not a unit vector")
         a = math.cos(angle / 2.0)

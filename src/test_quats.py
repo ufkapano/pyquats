@@ -51,6 +51,10 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(self.q1 * self.c2, Quat(-3, 4, 11, -2))
         self.assertEqual(self.c2 * self.q1, Quat(-3, 4, -5, 10))
 
+    def test_nonzero(self):
+        self.assertEqual("a", "a" if Quat(1) else "b")
+        self.assertEqual("b", "a" if Quat() else "b")
+
     def test_pos_neg(self):
         self.assertEqual(+self.q1, self.q1)
         self.assertEqual(-self.q1, Quat(-1, -2, -3, -4))
