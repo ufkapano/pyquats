@@ -92,6 +92,15 @@ class TestQuat(unittest.TestCase):
         self.assertRaises(TypeError, long, self.one)
         self.assertRaises(TypeError, float, self.one)
 
+    def test_hash(self):
+        aset = set()
+        aset.add(self.ii)
+        aset.add(self.ii)  # ignored
+        self.assertEqual(len(aset), 1)
+        aset.add(self.jj)
+        aset.add(self.kk)
+        self.assertEqual(len(aset), 3)
+
     def tearDown(self): pass
 
 

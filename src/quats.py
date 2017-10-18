@@ -157,6 +157,10 @@ class Quat:
 
     __pow__ = _pow2
 
+    def __hash__(self):
+        """Hashable quaternions."""
+        return hash(tuple(self.q))
+
     def __int__(self):
         """Conversion to int is not possible."""
         raise TypeError("can't convert quat to int")
@@ -164,6 +168,10 @@ class Quat:
     def __float__(self):
         """Conversion to float is not possible."""
         raise TypeError("can't convert quat to float")
+
+    def __complex__(self):
+        """Conversion to complex is not possible."""
+        raise TypeError("can't convert quat to complex")
 
     # method used to create a rotation Quaternion to rotate
     # any vector defined as a Quaternion
