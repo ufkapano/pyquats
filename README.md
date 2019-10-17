@@ -1,5 +1,5 @@
-py-quats
-========
+pyquats
+=======
 
 Python implementation of quaternions is presented. 
 
