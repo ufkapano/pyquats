@@ -35,7 +35,7 @@ def log(x):
     elif isinstance(x, complex):
         return Quat(1) * cmath.log(x)
     else:   # isinstance(x, Quat)
-        pass
+        raise NotImplementedError
 
 
 def sin(x):

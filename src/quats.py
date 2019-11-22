@@ -26,10 +26,9 @@ class Quat:
     def __repr__(self):
         """Compute the string (formal) representation of the quaternion."""
         return "Quat({}, {}, {}, {})".format(*self.q)
-        #return "Quat(%s, %s, %s, %s)" % tuple(self.q)
 
     def _normalize(self, other):
-        """Transformation to a quaternion."""
+        """Transformation an object to a quaternion."""
         if isinstance(other, (int, long, float)):
             other = Quat(other)
         elif isinstance(other, complex):
@@ -47,7 +46,6 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        #print "__nonzero__"
         return any(self.q[i] != 0 for i in range(4))
 
     def __pos__(self):
@@ -153,7 +151,7 @@ class Quat:
                         break
                 if n % 2 == 0:
                     quat = quat * quat
-                    n = n / 2
+                    n = n // 2
         return result
 
     __pow__ = _pow2

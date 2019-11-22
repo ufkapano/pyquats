@@ -164,10 +164,6 @@ class TestRotations(unittest.TestCase):
 
 if __name__== "__main__":
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestQuat)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestRotations)
-    suite = unittest.TestSuite([suite1, suite2])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
 
 # EOF
