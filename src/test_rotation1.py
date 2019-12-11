@@ -28,16 +28,16 @@ n_x = 2.0 * (q0 * q2 + q1 * q3)
 n_y = 2.0 * (q2 * q3 - q0 * q1)
 n_z = 2.0 * (q0 * q0 + q3 * q3) - 1.0
 
-print ("unit_quat", repr(unit_quat))
-print ("vector l", l_x, l_y, l_z)
-print ("vector m", m_x, m_y, m_z)
-print ("vector n", n_x, n_y, n_z)
+print ( "unit_quat", repr(unit_quat) )
+print ( "vector l", l_x, l_y, l_z )
+print ( "vector m", m_x, m_y, m_z )
+print ( "vector n", n_x, n_y, n_z )
 
 # Wybieranie spinow w kolejnych iteracjach
 x, y, z = 3, 4, 5
 for it in range(x*y*z):
-    i = (it / (z*y)) % x
-    j = (it % (z*y)) / z
+    i = (it // (z*y)) % x
+    j = (it % (z*y)) // z
     k = (it % (z*y)) % z
     print (i, j, k)
 

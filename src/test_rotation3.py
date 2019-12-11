@@ -18,7 +18,7 @@ w, vec =  numpy.linalg.eig(A)
 print (w, vec)
 
 # Zmieniam kolejnosc wartosci wlasnych i wektorow wlasnych.
-print ("Zmiana kolejnosci ...")
+print ( "Zmiana kolejnosci ..." )
 idx = w.argsort()[::-1] #large to small
 # idx = w.argsort() #small to large
 # idx to jest index_array : ndarray, int.
@@ -28,18 +28,18 @@ print (w, vec)
 # now they are ordered and you can iterate through your results
 # to write them to your file
 
-print ("Sprawdzenie dzialania macierzy na wektory ...")
+print ( "Sprawdzenie dzialania macierzy na wektory ..." )
 v0 = vec[:,0] # kolejne wektory wlasne z kolumn
 v1 = vec[:,1]
 v2 = vec[:,2]
-print ("A v", numpy.dot(A,v0))
-print ("lam v", w[0] * v0)
-print ("A v", numpy.dot(A,v1))
-print ("lam v", w[1] * v1)
-print ("A v", numpy.dot(A,v2))
-print ("lam v", w[2] * v2)   # bledy maszynowe
+print ( "A v", numpy.dot(A,v0) )
+print ( "lam v", w[0] * v0 )
+print ( "A v", numpy.dot(A,v1) )
+print ( "lam v", w[1] * v1 )
+print ( "A v", numpy.dot(A,v2) )
+print ( "lam v", w[2] * v2 )   # bledy maszynowe
 
-print ("Diagonalizacja B^T A B ...")
-print (numpy.dot(numpy.transpose(vec), numpy.dot(A,vec))) # dziala!
+print ( "Diagonalizacja B^T A B ..." )
+print ( numpy.dot(numpy.transpose(vec), numpy.dot(A,vec)) ) # dziala!
 
 # EOF

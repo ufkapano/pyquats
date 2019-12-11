@@ -31,10 +31,10 @@ n_x = 2.0 * (q0 * q2 + q1 * q3)
 n_y = 2.0 * (q2 * q3 - q0 * q1)
 n_z = 2.0 * (q0 * q0 + q3 * q3) - 1.0
 
-print ("unit_quat", repr(unit_quat))
-print ("vector l", l_x, l_y, l_z)
-print ("vector m", m_x, m_y, m_z)
-print ("vector n", n_x, n_y, n_z)
+print ( "unit_quat", repr(unit_quat) )
+print ( "vector l", l_x, l_y, l_z )
+print ( "vector m", m_x, m_y, m_z )
+print ( "vector n", n_x, n_y, n_z )
 
 # Sprawdzam dzialania na macierzach.
 Qll = numpy.zeros((3,3), dtype=float)
@@ -71,11 +71,11 @@ Qnn[1, 0] = Qnn[0, 1]
 Qnn[2, 0] = Qnn[0, 2]
 Qnn[2, 1] = Qnn[1, 2]
 
-print ("Qll", Qll)
-print ("Qmm", Qmm)
-print ("Qnn", Qnn)
+print ( "Qll", Qll )
+print ( "Qmm", Qmm )
+print ( "Qnn", Qnn )
 
-print ("Reczne ustawienia dla Q")
+print ( "Reczne ustawienia dla Q" )
 
 # dla  R_z(pi/4)
 #Qll = numpy.array([[5./8., 3./8., 0], [3./8., -1./8., 0], [0, 0, -0.5]], dtype=float)
@@ -88,16 +88,16 @@ Qll = numpy.array([[13./16., a, 0], [a, -5./16., 0], [0, 0, -0.5]], dtype=float)
 Qmm = numpy.array([[-5/16., -a, 0], [-a, 13/16., 0], [0, 0, -0.5]], dtype=float)
 Qnn = numpy.array([[-0.5, 0, 0], [0, -0.5, 0], [0, 0, 1]], dtype=float)
 
-print ("Qll", Qll)
-print ("Qmm", Qmm)
-print ("Qnn", Qnn)
+print ( "Qll", Qll )
+print ( "Qmm", Qmm )
+print ( "Qnn", Qnn )
 
-print ("eigenvalues ll", numpy.linalg.eigvals(Qll))
-print ("eigenvalues mm", numpy.linalg.eigvals(Qmm))
-print ("eigenvalues nn", numpy.linalg.eigvals(Qnn))
+print ( "eigenvalues ll", numpy.linalg.eigvals(Qll) )
+print ( "eigenvalues mm", numpy.linalg.eigvals(Qmm) )
+print ( "eigenvalues nn", numpy.linalg.eigvals(Qnn) )
 
-print ("eig ll", numpy.linalg.eig(Qll))
-print ("eig mm", numpy.linalg.eig(Qmm))
-print ("eig nn", numpy.linalg.eig(Qnn))
+print ( "eig ll", numpy.linalg.eig(Qll) )
+print ( "eig mm", numpy.linalg.eig(Qmm) )
+print ( "eig nn", numpy.linalg.eig(Qnn) )
 
 # EOF
