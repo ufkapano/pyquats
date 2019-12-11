@@ -1,4 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+#
+# Proba wykorzystania numpy do budowy kwaternionow.
+# Trzeba porownac szybkosc dzialania obu implementacji.
 
 try:
     real_types = (int, long, float)
@@ -7,14 +10,14 @@ except NameError:   # Python 3
     xrange = range
 
 import math
-
+import numpy
 
 class Quat:
     """The class defining a quaternion."""
 
     def __init__(self, x=0, y=0, z=0, t=0):
         """Create a Quat instance."""
-        self.q = [float(x), float(y), float(z), float(t)]
+        self.q = numpy.array([x, y, z, t], dtype=float)
 
     def __str__(self):
         """Compute the string (informal) representation of the quaternion."""
@@ -34,7 +37,7 @@ class Quat:
         return "Quat({}, {}, {}, {})".format(*self.q)
 
     def _normalize(self, other):
-        """Transformation an object to a quaternion."""
+        """Transformation to a quaternion."""
         if isinstance(other, real_types):
             other = Quat(other)
         elif isinstance(other, complex):
@@ -44,7 +47,7 @@ class Quat:
     def __eq__(self, other):
         """Test if the quaternions are equal."""
         other = self._normalize(other)
-        return all(self.q[i] == other.q[i] for i in range(4))
+        return numpy.array_equal(self.q, other.q)
 
     def __ne__(self, other):
         """Test if the quaternions are not equal."""
@@ -52,7 +55,7 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        return any(self.q[i] != 0 for i in range(4))
+        return not numpy.array_equal(self.q, numpy.zeros(4)) # na sile
 
     __bool__ = __nonzero__   # Python 3
 
@@ -62,30 +65,27 @@ class Quat:
 
     def __neg__(self):
         """Implementation of -q."""
-        #alist = [-item for item in self.q]
-        #return Quat(*alist)
-        return Quat(-self.q[0], -self.q[1], -self.q[2], -self.q[3])
+        alist = numpy.negative(self.q)
+        return Quat(*alist)
 
     def __add__(self, other):
         """Addition of quaternions."""
         other = self._normalize(other)
-        alist = [self.q[i] + other.q[i] for i in range(4)]
+        alist = numpy.add(self.q, other.q)
         return Quat(*alist)
 
     __radd__ = __add__
 
     def __sub__(self, other):
         """Subtraction of quaternions."""
-        # return self + (-other)
         other = self._normalize(other)
-        alist = [self.q[i] - other.q[i] for i in range(4)]
+        alist = numpy.subtract(self.q, other.q)
         return Quat(*alist)
 
     def __rsub__(self, other):
         """Subtraction of quaternions."""
-        # return (-self) + other
         other = self._normalize(other)
-        alist = [other.q[i] - self.q[i] for i in range(4)]
+        alist = numpy.subtract(other.q, self.q)
         return Quat(*alist)
 
     def __mul__(self, other):
@@ -116,7 +116,7 @@ class Quat:
 
     def __abs__(self):
         """Return the norm of a quaternion (a scalar)."""
-        powers = sum(item * item for item in self.q)
+        powers = numpy.dot(self.q, self.q) # iloczyn skalarny
         return math.sqrt(powers)
 
     def conjugate(self):
@@ -125,7 +125,7 @@ class Quat:
 
     def __invert__(self):   # ~p, zwraca p^{-1}
         """Reciprocal of the quaternion."""
-        powers = sum(item * item for item in self.q)
+        powers = numpy.dot(self.q, self.q) # iloczyn skalarny
         return (1.0 / powers) * self.conjugate()
 
     def _pow1(self, n):
@@ -192,7 +192,7 @@ class Quat:
     @classmethod
     def rot_quat(cls, axis, angle):
         """From the axis-angle representation to the quat.
-        The angle is in radians. The axis is a unit 3D vector."""
+        The angle is in radians. The axis is a unit vector 3D."""
         if sum(x * x for x in axis) != 1.0:
             raise ValueError("not a unit vector")
         a = math.cos(angle / 2.0)
