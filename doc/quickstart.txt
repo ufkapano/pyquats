@@ -1,0 +1,58 @@
+QUICK START
+----------------------------------------------------------------------
+QUATERNIONS
+
+import math
+from quats import Quat
+#from numpyquats import Quat   # quaternions using numpy
+
+c = 5 + 6J             # complex
+q = Quat(1, 2, 3, 4)   # quaternion
+p = Quat(5.0, 2.5, 3.6, 4.9)   # quaternion
+
+p == q, p != q   # comparisons
++q, -q
+p + q, p + c, c + q
+p - q, p - c, c - q
+p * q, p * c, c * q
+abs(q)
+q.conjugate()
+~q       # reciprocal
+pow(q, n), q ** n
+----------------------------------------------------------------------
+UNIT QUATERNIONS AS ROTATIONS
+
+rotX90 = Quat.rot_quat([1, 0, 0], math.pi * 0.5)
+rotY90 = Quat.rot_quat([0, 1, 0], math.pi * 0.5)
+rotZ90 = Quat.rot_quat([0, 0, 1], math.pi * 0.5)
+rotX180 = Quat(0, 1, 0, 0)
+rotY180 = Quat(0, 0, 1, 0)
+rotZ180 = Quat(0, 0, 0, 1)
+----------------------------------------------------------------------
+MATHEMATICAL FUNCTIONS FOR QUATERNIONS
+
+from quats import Quat
+#from numpyquats import Quat   # quaternions using numpy
+import qmath
+
+c = 5 + 6J             # complex
+q = Quat(1, 2, 3, 4)   # quaternion
+
+print ( qmath.exp(c) )
+print ( qmath.exp(q) )
+
+print ( qmath.log(c) )
+
+print ( qmath.sin(c) )
+print ( qmath.sin(q) )
+
+print ( qmath.cos(c) )
+print ( qmath.cos(q) )
+
+print ( qmath.sinh(c) )
+print ( qmath.sinh(q) )
+
+print ( qmath.cosh(c) )
+print ( qmath.cosh(q) )
+----------------------------------------------------------------------
+EOF

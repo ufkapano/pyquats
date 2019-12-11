@@ -91,7 +91,7 @@ class TestQuat(unittest.TestCase):
 
     def test_conversion(self):
         self.assertRaises(TypeError, int, self.one)
-        self.assertRaises(TypeError, long, self.one)
+        #self.assertRaises(TypeError, long, self.one)   # Python 2 only
         self.assertRaises(TypeError, float, self.one)
         self.assertRaises(TypeError, complex, self.one)
 
@@ -112,12 +112,12 @@ class TestRotations(unittest.TestCase):
     def setUp(self):
         self.rotX180 = Quat(0, 1, 0, 0)
         self.rotY180 = Quat(0, 0, 1, 0)
+        self.rotZ180 = Quat(0, 0, 0, 1)
         p2 = math.sqrt(0.5)
         p3 = math.sqrt(1.0 / 3.0)
         self.rotX90 = Quat(p2, p2, 0, 0)
         self.rotY90 = Quat(p2, 0, p2, 0)
         self.rotZ90 = Quat(p2, 0, 0, p2)
-        self.rotZ180 = Quat(0, 0, 0, 1)
         # obrot o kat 120 stopni wokol [0,1,1,1]
         self.rot120 = Quat(0.5, 0.5, 0.5, 0.5)
         self.vec1 = [p3, p3, p3]

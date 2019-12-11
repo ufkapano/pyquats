@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    real_types = (int, long, float)
+except NameError:   # Python 3
+    real_types = (int, float)
+    xrange = range
+
 import math
 
 
@@ -29,7 +35,7 @@ class Quat:
 
     def _normalize(self, other):
         """Transformation an object to a quaternion."""
-        if isinstance(other, (int, long, float)):
+        if isinstance(other, real_types):
             other = Quat(other)
         elif isinstance(other, complex):
             other = Quat(other.real, other.imag)
@@ -47,6 +53,8 @@ class Quat:
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
         return any(self.q[i] != 0 for i in range(4))
+
+    __bool__ = __nonzero__   # Python 3
 
     def __pos__(self):
         """Implementation of +q."""

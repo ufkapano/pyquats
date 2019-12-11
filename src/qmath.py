@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    real_types = (int, long, float)
+except NameError:   # Python 3
+    real_types = (int, float)
+    xrange = range
+
 import math
 import cmath
 from quats import Quat
@@ -7,7 +13,7 @@ from quats import Quat
 
 def exp(x):
     """Return the exponential value e**x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.exp(x))
     elif isinstance(x, complex):
         # exp(a+bJ)=exp(a)*(cos(b)+sin(b)J)
@@ -30,7 +36,7 @@ def exp(x):
 
 def log(x):
     """Return the natural logarithm (base e) of x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.log(x))
     elif isinstance(x, complex):
         return Quat(1) * cmath.log(x)
@@ -40,7 +46,7 @@ def log(x):
 
 def sin(x):
     """Return the sine of x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.sin(x))
     elif isinstance(x, complex):
         #return Quat(1) * cmath.sin(x)
@@ -56,7 +62,7 @@ def sin(x):
 
 def cos(x):
     """Return the cosine of x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.cos(x))
     elif isinstance(x, complex):
         #return Quat(1) * cmath.cos(x)
@@ -72,7 +78,7 @@ def cos(x):
 
 def sinh(x):
     """Return the hyperbolic sine of x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.sinh(x))
     elif isinstance(x, complex):
         #return Quat(1) * cmath.sinh(x)
@@ -87,7 +93,7 @@ def sinh(x):
 
 def cosh(x):
     """Return the hyperbolic cosine of x."""
-    if isinstance(x, (int, long, float)):
+    if isinstance(x, real_types):
         return Quat(math.cosh(x))
     elif isinstance(x, complex):
         #return Quat(1) * cmath.cosh(x)
