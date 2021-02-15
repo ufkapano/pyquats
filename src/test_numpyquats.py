@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import unittest
 import math
 from numpyquats import Quat
@@ -31,6 +32,7 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(self.q1 + self.q2, Quat(2, 3, 4, 5))
         self.assertEqual(self.q1 + self.c1, Quat(1, 3, 3, 4))
         self.assertEqual(self.c2 + self.q2, Quat(2, 3, 1, 1))
+        #print ( sys.getsizeof(self.q1) ) # 72 in Py2.7, 56 in Py3.7
 
     def test_sub(self):
         self.assertEqual(self.q1 - self.q2, Quat(0, 1, 2, 3))

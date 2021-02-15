@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import unittest
 import math
 from quats import Quat
@@ -26,6 +27,7 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(repr(self.zero),"Quat(0.0, 0.0, 0.0, 0.0)")
         self.assertEqual(repr(self.q1),"Quat(1.0, 2.0, 3.0, 4.0)")
         self.assertEqual(repr(self.q4),"Quat(-1.2, -2.3, -3.4, -4.5)")
+        #print ( sys.getsizeof(self.q1) ) # 72 in Py2.7, 56 in Py3.7
 
     def test_add(self):
         self.assertEqual(self.q1 + self.q2, Quat(2, 3, 4, 5))
