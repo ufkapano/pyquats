@@ -10,14 +10,14 @@ except NameError:   # Python 3
     xrange = range
 
 import math
-import numpy
+import numpy as np
 
 class Quat:
     """The class defining a quaternion."""
 
     def __init__(self, x=0, y=0, z=0, t=0):
         """Create a Quat instance."""
-        self.q = numpy.array([x, y, z, t], dtype=float)
+        self.q = np.array([x, y, z, t], dtype=float)
 
     def __str__(self):
         """Compute the string (informal) representation of the quaternion."""
@@ -47,7 +47,8 @@ class Quat:
     def __eq__(self, other):
         """Test if the quaternions are equal."""
         other = self._normalize(other)
-        return numpy.array_equal(self.q, other.q)
+        return np.array_equal(self.q, other.q) # return bool
+        #return np.all(self.q == other.q) # return 'numpy.bool_'
 
     def __ne__(self, other):
         """Test if the quaternions are not equal."""
@@ -55,7 +56,8 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        return not numpy.array_equal(self.q, numpy.zeros(4)) # na sile
+        return not np.array_equal(self.q, np.zeros(4)) # return bool
+        #return bool(np.any(self.q != 0)) # return 'numpy.bool_'
 
     __bool__ = __nonzero__   # Python 3
 
@@ -65,13 +67,13 @@ class Quat:
 
     def __neg__(self):
         """Implementation of -q."""
-        alist = numpy.negative(self.q)
+        alist = np.negative(self.q)
         return Quat(*alist)
 
     def __add__(self, other):
         """Addition of quaternions."""
         other = self._normalize(other)
-        alist = numpy.add(self.q, other.q)
+        alist = np.add(self.q, other.q)
         return Quat(*alist)
 
     __radd__ = __add__
@@ -79,13 +81,13 @@ class Quat:
     def __sub__(self, other):
         """Subtraction of quaternions."""
         other = self._normalize(other)
-        alist = numpy.subtract(self.q, other.q)
+        alist = np.subtract(self.q, other.q)
         return Quat(*alist)
 
     def __rsub__(self, other):
         """Subtraction of quaternions."""
         other = self._normalize(other)
-        alist = numpy.subtract(other.q, self.q)
+        alist = np.subtract(other.q, self.q)
         return Quat(*alist)
 
     def __mul__(self, other):
@@ -116,7 +118,7 @@ class Quat:
 
     def __abs__(self):
         """Return the norm of a quaternion (a scalar)."""
-        powers = numpy.dot(self.q, self.q) # iloczyn skalarny
+        powers = np.dot(self.q, self.q) # iloczyn skalarny
         return math.sqrt(powers)
 
     def conjugate(self):
@@ -125,7 +127,7 @@ class Quat:
 
     def __invert__(self):   # ~p, zwraca p^{-1}
         """Reciprocal of the quaternion."""
-        powers = numpy.dot(self.q, self.q) # iloczyn skalarny
+        powers = np.dot(self.q, self.q) # iloczyn skalarny
         return (1.0 / powers) * self.conjugate()
 
     def _pow1(self, n):
