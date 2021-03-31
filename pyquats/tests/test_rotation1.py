@@ -2,7 +2,7 @@
 
 import math
 import numpy
-from quats import Quat
+from pyquats.quats import Quat
 
 #unit_quat = Quat.rot_quat([0, 0, 1], 0) # R_z(0)
 #unit_quat = Quat.rot_quat([0, 0, 1], math.pi) # R_z(pi)

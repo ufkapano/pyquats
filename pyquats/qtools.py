@@ -2,7 +2,8 @@
 
 import math
 import random
-from quats import Quat
+from pyquats.quats import Quat
+#from pyquats.numpyquats import Quat
 
 # Rotates a vector with respect to a quat.
 # The vector is from R^3, the result is from R^3, rot_quat is a unit quat.

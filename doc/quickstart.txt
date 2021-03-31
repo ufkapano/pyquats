@@ -1,10 +1,28 @@
 QUICK START
 ----------------------------------------------------------------------
+INSTALLATION IN LINUX WITH PYTHON AND GIT INSTALLED
+
+1. Clone the project into the home directory
+
+$ cd
+$ git clone https://github.com/ufkapano/pyquats.git
+
+2. Add the 'pyquats' directory to the PYTHONPATH environment variable,
+for .bashrc file you can add:
+
+if [ -n "${PYTHONPATH}" ] ; then
+    PYTHONPATH="${PYTHONPATH}:$HOME/pyquats"
+else
+    PYTHONPATH="$HOME/pyquats"
+fi
+
+3. Start using quaternions!
+----------------------------------------------------------------------
 QUATERNIONS
 
 import math
-from quats import Quat
-#from numpyquats import Quat   # quaternions using numpy
+from pyquats.quats import Quat
+#from pyquats.numpyquats import Quat   # quaternions using numpy (slow)
 
 c = 5 + 6J             # complex
 q = Quat(1, 2, 3, 4)   # quaternion
@@ -32,9 +50,8 @@ rotZ180 = Quat(0, 0, 0, 1)
 ----------------------------------------------------------------------
 MATHEMATICAL FUNCTIONS FOR QUATERNIONS
 
-from quats import Quat
-#from numpyquats import Quat   # quaternions using numpy
-import qmath
+from pyquats.quats import Quat
+import pyquats.qmath as qmath
 
 c = 5 + 6J             # complex
 q = Quat(1, 2, 3, 4)   # quaternion

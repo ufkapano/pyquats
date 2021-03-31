@@ -8,7 +8,8 @@ except NameError:   # Python 3
 
 import math
 import cmath
-from quats import Quat
+from pyquats.quats import Quat
+#from pyquats.numpyquats import Quat
 
 
 def exp(x):

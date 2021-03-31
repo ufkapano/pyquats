@@ -3,7 +3,7 @@
 import sys
 import unittest
 import math
-from quats import Quat
+from pyquats.numpyquats import Quat
 
 
 class TestQuat(unittest.TestCase):
@@ -27,12 +27,12 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(repr(self.zero),"Quat(0.0, 0.0, 0.0, 0.0)")
         self.assertEqual(repr(self.q1),"Quat(1.0, 2.0, 3.0, 4.0)")
         self.assertEqual(repr(self.q4),"Quat(-1.2, -2.3, -3.4, -4.5)")
-        #print ( sys.getsizeof(self.q1) ) # 72 in Py2.7, 56 in Py3.7
 
     def test_add(self):
         self.assertEqual(self.q1 + self.q2, Quat(2, 3, 4, 5))
         self.assertEqual(self.q1 + self.c1, Quat(1, 3, 3, 4))
         self.assertEqual(self.c2 + self.q2, Quat(2, 3, 1, 1))
+        #print ( sys.getsizeof(self.q1) ) # 72 in Py2.7, 56 in Py3.7
 
     def test_sub(self):
         self.assertEqual(self.q1 - self.q2, Quat(0, 1, 2, 3))
@@ -102,7 +102,7 @@ class TestQuat(unittest.TestCase):
 
     def test_conversion(self):
         self.assertRaises(TypeError, int, self.one)
-        #self.assertRaises(TypeError, long, self.one)   # Python 2 only
+        #self.assertRaises(TypeError, long, self.one)   # Python 3
         self.assertRaises(TypeError, float, self.one)
         self.assertRaises(TypeError, complex, self.one)
 

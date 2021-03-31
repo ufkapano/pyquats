@@ -127,7 +127,7 @@ class Quat:
         """Conjugate the quaternion."""
         return Quat(self.q[0], -self.q[1], -self.q[2], -self.q[3])
 
-    def __invert__(self):   # ~p, zwraca p^{-1}
+    def __invert__(self):   # ~p, return p^{-1}
         """Reciprocal of the quaternion."""
         powers = sum(item * item for item in self.q)
         return (1.0 / powers) * self.conjugate()

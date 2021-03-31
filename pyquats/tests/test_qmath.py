@@ -3,8 +3,8 @@
 import unittest
 import math
 import cmath
-import qmath
-from quats import Quat
+import pyquats.qmath as qmath
+from pyquats.quats import Quat
 
 
 class TestQuatMath(unittest.TestCase):

@@ -2,12 +2,12 @@
 
 import unittest
 import math
-from quats import Quat
-from qtools import rotate1
-from qtools import rotate2
-from qtools import rotate3
-from qtools import random_quat_uniax
-from qtools import random_quat_biax
+from pyquats.quats import Quat
+from pyquats.qtools import rotate1
+from pyquats.qtools import rotate2
+from pyquats.qtools import rotate3
+from pyquats.qtools import random_quat_uniax
+from pyquats.qtools import random_quat_biax
 
 
 class TestRotations(unittest.TestCase):
