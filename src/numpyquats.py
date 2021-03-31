@@ -121,6 +121,10 @@ class Quat:
         powers = np.dot(self.q, self.q) # iloczyn skalarny
         return math.sqrt(powers)
 
+    def is_unit(self):
+        """Test a unit quaternion."""
+        return 1.0 == np.dot(self.q, self.q)
+
     def conjugate(self):
         """Conjugate the quaternion."""
         return Quat(self.q[0], -self.q[1], -self.q[2], -self.q[3])

@@ -67,6 +67,15 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(self.jj * self.jj, -self.one)
         self.assertEqual(self.kk * self.kk, -self.one)
 
+    def test_is_unit(self):
+        self.assertTrue(self.one.is_unit())
+        self.assertTrue(self.ii.is_unit())
+        self.assertTrue(self.jj.is_unit())
+        self.assertTrue(self.kk.is_unit())
+        self.assertTrue(Quat(0.5, 0.5, 0.5, 0.5).is_unit())
+        self.assertFalse(self.q1.is_unit())
+        self.assertFalse(self.q2.is_unit())
+
     def test_conjugate(self):
         self.assertEqual(self.q1.conjugate(), Quat(1, -2, -3, -4))
         self.assertEqual(self.one.conjugate(), self.one)

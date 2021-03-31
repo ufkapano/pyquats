@@ -19,6 +19,7 @@ abs(q)
 q.conjugate()
 ~q       # reciprocal
 pow(q, n), q ** n
+q.is_unit()   # test a unit quaternion
 ----------------------------------------------------------------------
 UNIT QUATERNIONS AS ROTATIONS
 

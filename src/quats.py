@@ -119,6 +119,10 @@ class Quat:
         powers = sum(item * item for item in self.q)
         return math.sqrt(powers)
 
+    def is_unit(self):
+        """Test a unit quaternion."""
+        return 1.0 == sum(item * item for item in self.q)
+
     def conjugate(self):
         """Conjugate the quaternion."""
         return Quat(self.q[0], -self.q[1], -self.q[2], -self.q[3])
