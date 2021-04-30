@@ -38,6 +38,7 @@ q.conjugate()
 ~q       # reciprocal
 pow(q, n), q ** n
 q.is_unit()   # test a unit quaternion
+[q[i] for i in range(4)]   # __getitem__ implemented
 ----------------------------------------------------------------------
 UNIT QUATERNIONS AS ROTATIONS
 

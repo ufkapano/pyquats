@@ -33,6 +33,10 @@ class Quat:
         """Compute the string (formal) representation of the quaternion."""
         return "Quat({}, {}, {}, {})".format(*self.q)
 
+    def __getitem__(self, key):
+        """Implement quat[key]."""
+        return self.q[key]
+
     def _normalize(self, other):
         """Transformation an object to a quaternion."""
         if isinstance(other, real_types):

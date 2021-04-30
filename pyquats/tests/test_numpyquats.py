@@ -28,6 +28,13 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(repr(self.q1),"Quat(1.0, 2.0, 3.0, 4.0)")
         self.assertEqual(repr(self.q4),"Quat(-1.2, -2.3, -3.4, -4.5)")
 
+    def test_getitem(self):
+        self.assertEqual(self.q1[0], 1)
+        self.assertEqual(self.q1[1], 2)
+        self.assertEqual(self.q1[2], 3)
+        self.assertEqual(self.q1[3], 4)
+        self.assertRaises(IndexError, self.q1.__getitem__, 5)
+
     def test_add(self):
         self.assertEqual(self.q1 + self.q2, Quat(2, 3, 4, 5))
         self.assertEqual(self.q1 + self.c1, Quat(1, 3, 3, 4))
