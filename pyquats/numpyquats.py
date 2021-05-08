@@ -212,6 +212,21 @@ class Quat:
         d = axis[2] * sinus
         return cls(a, b, c, d)
 
+    @classmethod
+    def from_x_rotation(cls, angle):
+        """Create the unit quat for the X rotation."""
+        return cls.rot_quat([1, 0, 0], angle)
+
+    @classmethod
+    def from_y_rotation(cls, angle):
+        """Create the unit quat for the Y rotation."""
+        return cls.rot_quat([0, 1, 0], angle)
+
+    @classmethod
+    def from_z_rotation(cls, angle):
+        """Create the unit quat for the Z rotation."""
+        return cls.rot_quat([0, 0, 1], angle)
+
 Quaternion = Quat
 
 # EOF

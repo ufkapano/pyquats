@@ -122,6 +122,11 @@ class TestQuat(unittest.TestCase):
         aset.add(self.kk)
         self.assertEqual(len(aset), 3)
 
+    def test_from_rotations(self):
+        self.assertAlmostEqual(Quat.from_x_rotation(math.pi), self.ii)
+        self.assertAlmostEqual(Quat.from_y_rotation(math.pi), self.jj)
+        self.assertAlmostEqual(Quat.from_z_rotation(math.pi), self.kk)
+
     def tearDown(self): pass
 
 if __name__== "__main__":

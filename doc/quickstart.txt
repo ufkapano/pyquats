@@ -42,12 +42,14 @@ q.is_unit()   # test a unit quaternion
 ----------------------------------------------------------------------
 UNIT QUATERNIONS AS ROTATIONS
 
-rotX90 = Quat.rot_quat([1, 0, 0], math.pi * 0.5)
-rotY90 = Quat.rot_quat([0, 1, 0], math.pi * 0.5)
-rotZ90 = Quat.rot_quat([0, 0, 1], math.pi * 0.5)
-rotX180 = Quat(0, 1, 0, 0)
-rotY180 = Quat(0, 0, 1, 0)
-rotZ180 = Quat(0, 0, 0, 1)
+import math
+
+rotX90 = Quat.from_x_rotation(math.pi * 0.5)
+rotY90 = Quat.from_y_rotation(math.pi * 0.5)
+rotZ90 = Quat.from_z_rotation(math.pi * 0.5)
+rotX180 = Quat.from_x_rotation(math.pi)   # Quat(0, 1, 0, 0)
+rotY180 = Quat.from_y_rotation(math.pi)   # Quat(0, 0, 1, 0)
+rotZ180 = Quat.from_z_rotation(math.pi)   # Quat(0, 0, 0, 1)
 ----------------------------------------------------------------------
 MATHEMATICAL FUNCTIONS FOR QUATERNIONS
 
