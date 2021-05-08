@@ -48,7 +48,7 @@ class Quat:
     def __eq__(self, other):
         """Test if the quaternions are equal."""
         other = self._normalize(other)
-        return all(self.q[i] == other.q[i] for i in range(4))
+        return self.q == other.q
 
     def __ne__(self, other):
         """Test if the quaternions are not equal."""
@@ -56,7 +56,7 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        return any(self.q[i] != 0 for i in range(4))
+        return self.q != [0, 0, 0, 0]
 
     __bool__ = __nonzero__   # Python 3
 
