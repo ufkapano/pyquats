@@ -26,9 +26,7 @@ def rotate2(vector, axis, angle):
 
 def rotate3(vector, phi, theta, psi):
     """Return the rotated vector (Euler angles used)."""
-    unit_quat = Quat.rot_quat([0, 0, 1], phi)
-    unit_quat *= Quat.rot_quat([0, 1, 0], theta)
-    unit_quat *= Quat.rot_quat([0, 0, 1], psi)
+    unit_quat = Quat.from_eulers(phi, theta, psi)
     return rotate1(vector, unit_quat)
 
 def random_quat_uniax():
@@ -36,8 +34,7 @@ def random_quat_uniax():
     phi = random.uniform(0, 2*math.pi)
     ct = random.uniform(-1, 1)
     theta = math.acos(ct)   # mozna tez -ct
-    quat = Quat.rot_quat([0, 0, 1], phi)
-    quat *= Quat.rot_quat([0, 1, 0], theta)
+    quat = Quat.from_eulers(phi, theta, 0)
     return quat
 
 def random_quat_biax():
@@ -46,9 +43,7 @@ def random_quat_biax():
     ct = random.uniform(-1, 1)
     theta = math.acos(ct)   # mozna tez -ct
     psi = random.uniform(0, 2*math.pi)
-    quat = Quat.rot_quat([0, 0, 1], phi)
-    quat *= Quat.rot_quat([0, 1, 0], theta)
-    quat *= Quat.rot_quat([0, 0, 1], psi)
+    quat = Quat.from_eulers(phi, theta, psi)
     return quat
 
 # EOF

@@ -127,6 +127,11 @@ class TestQuat(unittest.TestCase):
         self.assertAlmostEqual(Quat.from_y_rotation(math.pi), self.jj)
         self.assertAlmostEqual(Quat.from_z_rotation(math.pi), self.kk)
 
+    def test_from_eulers(self):
+        self.assertAlmostEqual(Quat.from_eulers(0, math.pi, 0), self.jj)
+        self.assertAlmostEqual(Quat.from_eulers(math.pi, 0, 0), self.kk)
+        self.assertAlmostEqual(Quat.from_eulers(0, 0, math.pi), self.kk)
+
     def tearDown(self): pass
 
 if __name__== "__main__":

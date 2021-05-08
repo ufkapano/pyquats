@@ -225,6 +225,14 @@ class Quat:
         """Create the unit quat for the Z rotation."""
         return cls.rot_quat([0, 0, 1], angle)
 
+    @classmethod
+    def from_eulers(cls, phi, theta, psi):
+        """Create the unit quat from Euler angles."""
+        unit_quat = cls.from_z_rotation(phi)
+        unit_quat *= cls.from_y_rotation(theta)
+        unit_quat *= cls.from_z_rotation(psi)
+        return unit_quat
+
 Quaternion = Quat
 
 # EOF

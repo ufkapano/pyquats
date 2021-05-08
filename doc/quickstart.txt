@@ -50,6 +50,8 @@ rotZ90 = Quat.from_z_rotation(math.pi * 0.5)
 rotX180 = Quat.from_x_rotation(math.pi)   # Quat(0, 1, 0, 0)
 rotY180 = Quat.from_y_rotation(math.pi)   # Quat(0, 0, 1, 0)
 rotZ180 = Quat.from_z_rotation(math.pi)   # Quat(0, 0, 0, 1)
+rotY60 = Quat.from_eulers(0, math.pi / 3.0, 0)
+rotZ60 = Quat.from_eulers(math.pi / 3.0, 0, 0)
 ----------------------------------------------------------------------
 MATHEMATICAL FUNCTIONS FOR QUATERNIONS
 
