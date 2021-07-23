@@ -2,8 +2,7 @@
 
 import math
 import numpy
-#from pyquats.quats import Quat
-from pyquats.numpyquats import Quat
+from pyquats.quats import Quat
 
 #unit_quat = Quat.rot_quat([0, 0, 1], 0) # R_z(0)
 #unit_quat = Quat.rot_quat([0, 0, 1], math.pi) # R_z(pi)
@@ -16,10 +15,7 @@ from pyquats.numpyquats import Quat
 #unit_quat = Quat.rot_quat([0, 0, 1], math.pi * 0.25) # R_z(pi/4)
 unit_quat = Quat.rot_quat([0, 0, 1], math.pi / 6.) # R_z(pi/6)
 
-q0 = unit_quat.q[0]
-q1 = unit_quat.q[1]
-q2 = unit_quat.q[2]
-q3 = unit_quat.q[3]
+q0, q1, q2, q3 = unit_quat.q
 
 l_x = 2.0 * (q0 * q0 + q1 * q1) - 1.0
 l_y = 2.0 * (q0 * q3 + q1 * q2)

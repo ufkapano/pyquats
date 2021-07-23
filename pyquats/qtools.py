@@ -46,4 +46,33 @@ def random_quat_biax():
     quat = Quat.from_eulers(phi, theta, psi)
     return quat
 
+random_quat = random_quat_biax
+
+def random_quat_Xwall():
+    """Return a random rotation quat for biaxial molecules at a X wall."""
+    alpha = random.uniform(0, 2*math.pi)
+    beta = random.choice((0, math.pi))
+    #print("beta {}".format(beta))
+    quat = Quat.from_x_rotation(alpha)
+    quat *= Quat.from_z_rotation(beta)
+    return quat
+
+def random_quat_Ywall():
+    """Return a random rotation quat for biaxial molecules at a Y wall."""
+    alpha = random.uniform(0, 2*math.pi)
+    beta = math.pi * random.choice((0.5, 1.5))
+    #print("beta {}".format(beta))
+    quat = Quat.from_y_rotation(alpha)
+    quat *= Quat.from_z_rotation(beta)
+    return quat
+
+def random_quat_Zwall():
+    """Return a random rotation quat for biaxial molecules at a Z wall."""
+    alpha = random.uniform(0, 2*math.pi)
+    beta = math.pi * random.choice((0.5, 1.5))
+    #print("beta {}".format(beta))
+    quat = Quat.from_z_rotation(alpha)
+    quat *= Quat.from_y_rotation(beta)
+    return quat
+
 # EOF
