@@ -56,7 +56,7 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        return self.q != [0, 0, 0, 0]
+        return self.q != [0.0, 0.0, 0.0, 0.0]
 
     __bool__ = __nonzero__   # Python 3
 
@@ -122,6 +122,18 @@ class Quat:
         """Return the norm of a quaternion (a scalar)."""
         powers = sum(item * item for item in self.q)
         return math.sqrt(powers)
+
+    norm = __abs__
+
+    def norm_squared(self):
+        """Return the squared norm of a quaternion (a scalar)."""
+        return sum(item * item for item in self.q)
+
+    def normalized(self):
+        """Return a normalized version of this quaternion."""
+        a = abs(self)
+        alist = [item / a for item in self.q]
+        return Quat(*alist)
 
     def is_unit(self):
         """Test a unit quaternion."""
@@ -192,6 +204,55 @@ class Quat:
         """Conversion to complex is not possible."""
         raise TypeError("can't convert quat to complex")
 
+    def apply_to_vector(self, vector):
+        """Return the rotated vector."""
+        if self.is_unit():
+            unit_quat = self
+        else:
+            print("not a unit quaternion")
+            unit_quat = self.normalized()
+        if len(vector) != 3:
+            raise ValueError("not a 3D vector")
+        vec_quat = Quat(0, vector[0], vector[1], vector[2])
+        vec_quat = unit_quat * vec_quat * (~unit_quat)
+        # zwracamy wektor z R^3 (wycinek)
+        return vec_quat.q[1:]   # list or numpy.array
+
+    def get_rotation_matrix(self):
+        """Return the rotation matrix."""
+        w, x, y, z = self.q
+
+        w2 = w * w
+        x2 = x * x
+        y2 = y * y
+        z2 = z * z
+        xy = x * y
+        wz = w * z
+        xz = x * z
+        wy = w * y
+        yz = y * z
+        wx = w * x
+
+        inverse = 1.0 / (w2 + x2 + y2 + z2)
+        inverse2 = 2.0 * inverse
+
+        m00 = (w2 + x2 - y2 - z2) * inverse
+        m01 = (xy - wz) * inverse2
+        m02 = (xz + wy) * inverse2
+
+        m10 = (xy + wz) * inverse2
+        m11 = (w2 - x2 + y2 - z2) * inverse
+        m12 = (yz - wx) * inverse2
+
+        m20 = (xz - wy) * inverse2
+        m21 = (yz + wx) * inverse2
+        m22 = (w2 - x2 - y2 + z2) * inverse
+
+        return [[m00, m01, m02, 0.],
+                [m10, m11, m12, 0.],
+                [m20, m21, m22, 0.],
+                [0., 0., 0., 1.]]
+
     # method used to create a rotation Quaternion to rotate
     # any vector defined as a Quaternion
     # with respect to the vector vect theta 'radians';
@@ -201,8 +262,12 @@ class Quat:
     def rot_quat(cls, axis, angle):
         """From the axis-angle representation to the quat.
         The angle is in radians. The axis is a unit 3D vector."""
-        if sum(x * x for x in axis) != 1.0:
-            raise ValueError("not a unit vector")
+        if len(axis) != 3:
+            raise ValueError("not a 3D vector")
+        length = math.sqrt(sum(x * x for x in axis))
+        if length != 1.0:
+            print("not a unit vector")
+            axis = [x / length for x in axis]
         a = math.cos(angle / 2.0)
         sinus = math.sin(angle / 2.0)
         b = axis[0] * sinus
@@ -224,6 +289,11 @@ class Quat:
     def from_z_rotation(cls, angle):
         """Create the unit quat for the Z rotation."""
         return cls.rot_quat([0, 0, 1], angle)
+
+    create_from_axis_rotation = rot_quat
+    create_from_x_rotation = from_x_rotation
+    create_from_y_rotation = from_y_rotation
+    create_from_z_rotation = from_z_rotation
 
     @classmethod
     def from_eulers(cls, phi, theta, psi):

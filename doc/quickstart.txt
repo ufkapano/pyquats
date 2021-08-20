@@ -39,6 +39,8 @@ q.conjugate()
 pow(q, n), q ** n
 q.is_unit()   # test a unit quaternion
 [q[i] for i in range(4)]   # __getitem__ implemented
+q.apply_to_vector(vector3d)   # return the rotated vector (q is unit)
+q.get_rotation_matrix()   # return the rotation matrix (q is unit)
 ----------------------------------------------------------------------
 UNIT QUATERNIONS AS ROTATIONS
 
@@ -60,7 +62,7 @@ from pyquats.qtools import random_quat_Xwall
 from pyquats.qtools import random_quat_Ywall
 from pyquats.qtools import random_quat_Zwall
 
-rquat = random_quat()
+rq = random_quat()
 Xwall = random_quat_Xwall   # vector l || X
 Ywall = random_quat_Ywall   # vector l || Y
 Zwall = random_quat_Zwall   # vector l || Z
