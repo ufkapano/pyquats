@@ -58,21 +58,13 @@ print ( "F202", F202 )
 print ( "F220", F220 )
 print ( "F222", F222 )
 
-# Wybieranie spinow w kolejnych iteracjach
+# Wybieranie spinow w kolejnych iteracjach.
+# Mozna zrobic kilka obiegow po wszystkich spinach.
 x, y, z = 3, 4, 5
-for it in range(x*y*z):
+for it in range(2*x*y*z):
     i = (it // (z*y)) % x
     j = (it % (z*y)) // z
     k = (it % (z*y)) % z
     #print (i, j, k)
-
-# Sprawdzam dzialania na macierzach.
-A = numpy.zeros((3,3), dtype=float)
-B = numpy.arange(9).reshape((3,3))
-print (B)
-#A += B   # elementwise
-A -= B   # elementwise
-A /= 10.   # elementwise
-print (A)
 
 # EOF

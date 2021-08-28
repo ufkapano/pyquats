@@ -4,16 +4,17 @@ import math
 import numpy
 from pyquats.quats import Quat
 
-#unit_quat = Quat.rot_quat([0, 0, 1], 0) # R_z(0)
-#unit_quat = Quat.rot_quat([0, 0, 1], math.pi) # R_z(pi)
-#unit_quat = Quat.rot_quat([0, 1, 0], math.pi) # R_y(pi)
-#unit_quat = Quat.rot_quat([1, 0, 0], math.pi) # R_x(pi)
-#unit_quat = Quat.rot_quat([0, 0, 1], math.pi * 0.5) # R_z(pi/2)
-#unit_quat = Quat.rot_quat([0, 1, 0], math.pi * 0.5) # R_y(pi/2)
-#unit_quat = Quat.rot_quat([1, 0, 0], math.pi * 0.5) # R_x(pi/2)
+unit_quat = Quat(1) # R_z(0)
+#unit_quat = Quat.from_z_rotation(0) # R_z(0)
+#unit_quat = Quat.from_z_rotation(math.pi) # R_z(pi)
+#unit_quat = Quat.from_y_rotation(math.pi) # R_y(pi)
+#unit_quat = Quat.from_x_rotation(math.pi) # R_x(pi)
+#unit_quat = Quat.from_z_rotation(math.pi * 0.5) # R_z(pi/2)
+#unit_quat = Quat.from_y_rotation(math.pi * 0.5) # R_y(pi/2)
+#unit_quat = Quat.from_x_rotation(math.pi * 0.5) # R_x(pi/2)
 #unit_quat = Quat(0.5, 0.5, 0.5, 0.5)   # os [1,1,1], kat 120 stopni
-#unit_quat = Quat.rot_quat([0, 0, 1], math.pi * 0.25) # R_z(pi/4)
-unit_quat = Quat.rot_quat([0, 0, 1], math.pi / 6.) # R_z(pi/6)
+#unit_quat = Quat.from_z_rotation(math.pi * 0.25) # R_z(pi/4)
+#unit_quat = Quat.from_z_rotation(math.pi / 6.) # R_z(pi/6)
 
 q0, q1, q2, q3 = unit_quat.q
 
@@ -71,14 +72,23 @@ print ( "Qll", Qll )
 print ( "Qmm", Qmm )
 print ( "Qnn", Qnn )
 
-print ( "Reczne ustawienia dla Q" )
+print ( "Manual settings for Q" )
 
-# dla  R_z(pi/4)
+# Konfiguracja idealna R_z(0).
+Qll_ideal = numpy.array([[1, 0, 0], [0, -0.5, 0], [0, 0, -0.5]], dtype=float)
+Qmm_ideal = numpy.array([[-0.5, 0, 0], [0, 1, 0], [0, 0, -0.5]], dtype=float)
+Qnn_ideal = numpy.array([[-0.5, 0, 0], [0, -0.5, 0], [0, 0, 1]], dtype=float)
+
+# for R_z(pi/4)
+# Do tensorow idealnych dodaje tensory obrocone R_z(pi/4)
+# i wynik dziele przez 2.
 #Qll = numpy.array([[5./8., 3./8., 0], [3./8., -1./8., 0], [0, 0, -0.5]], dtype=float)
 #Qmm = numpy.array([[-1/8., -3/8., 0], [-3/8., 5/8., 0], [0, 0, -0.5]], dtype=float)
 #Qnn = numpy.array([[-0.5, 0, 0], [0, -0.5, 0], [0, 0, 1]], dtype=float)
 
-# dla  R_z(pi/6)
+# for R_z(pi/6)
+# Do tensorow idealnych dodaje tensory obrocone R_z(pi/6)
+# i wynik dziele przez 2.
 a = 3*math.sqrt(3)/16.
 Qll = numpy.array([[13./16., a, 0], [a, -5./16., 0], [0, 0, -0.5]], dtype=float)
 Qmm = numpy.array([[-5/16., -a, 0], [-a, 13/16., 0], [0, 0, -0.5]], dtype=float)

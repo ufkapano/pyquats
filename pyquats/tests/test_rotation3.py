@@ -11,11 +11,16 @@
 import math
 import numpy
 
-A = numpy.array([[3,1,-1], [1,3,-1], [-1,-1,5]])
+A = numpy.array([[3,1,-1], [1,3,-1], [-1,-1,5]], dtype=float)
+print ( A )
 # Wartosci wlasne to 2, 3, 6, ale kolejnosc moze byc rozna.
 # Wektory wlasne beda ulozone kolumnami!
+# The column vec[:,i] is the eigenvector corresponding to the eigenvalue w[i].
 w, vec =  numpy.linalg.eig(A)
-print (w, vec)
+#print (w, vec)
+print ("eigenvalues", w)
+print ("unit eigenvectors (in columns)")
+print (vec)
 
 # Zmieniam kolejnosc wartosci wlasnych i wektorow wlasnych.
 print ( "Zmiana kolejnosci ..." )
@@ -29,6 +34,8 @@ print (w, vec)
 # to write them to your file
 
 print ( "Sprawdzenie dzialania macierzy na wektory ..." )
+# Mnozenie macierzy i wektora wlasnego ma byc rowne mnozeniu
+# wartosci wlasnej i wektora wlasnego.
 v0 = vec[:,0] # kolejne wektory wlasne z kolumn
 v1 = vec[:,1]
 v2 = vec[:,2]

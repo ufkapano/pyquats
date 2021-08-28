@@ -16,19 +16,6 @@ class Quat:
         """Create a Quat instance."""
         self.q = [float(x), float(y), float(z), float(t)]
 
-    def __str__(self):
-        """Compute the string (informal) representation of the quaternion."""
-        #return str(self.q)   # brzydkie
-        words = []
-        labels = ["1", "i", "j", "k"]
-        words.append(str(self.q[0]))
-        for i in range(1, 4):
-            if self.q[i] >= 0:
-                words.append("+")
-            words.append(str(self.q[i]))
-            words.append(labels[i])
-        return "".join(words)
-
     def __repr__(self):
         """Compute the string (formal) representation of the quaternion."""
         return "Quat({}, {}, {}, {})".format(*self.q)
