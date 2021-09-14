@@ -46,8 +46,6 @@ def random_quat_biax():
     quat = Quat.from_eulers(phi, theta, psi)
     return quat
 
-random_quat = random_quat_biax
-
 def random_quat_Xwall():
     """Return a random rotation quat for biaxial molecules at a X wall."""
     alpha = random.uniform(0, 2*math.pi)
@@ -74,5 +72,23 @@ def random_quat_Zwall():
     quat = Quat.from_z_rotation(alpha)
     quat *= Quat.from_y_rotation(beta)
     return quat
+
+def random_pair():
+    """Return a random pair (s1, s2), where s1^2 + s2^2 < 1."""
+    while True:
+        s1 = random.uniform(-1, 1)
+        s2 = random.uniform(-1, 1)
+        if s1 * s1 + s2 * s2 < 1:
+            break
+    return s1, s2
+
+def random_unit_quat():
+    """Return a random unit quat (Marsaglia, 1972)."""
+    s1, s2 = random_pair()
+    s3, s4 = random_pair()
+    S1 = s1 * s1 + s2 * s2
+    S2 = s3 * s3 + s4 * s4
+    a = math.sqrt((1.0 - S1) / S2)
+    return Quat(s1, s2, s3 * a, s4 * a)
 
 # EOF

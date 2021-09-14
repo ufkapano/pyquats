@@ -8,6 +8,7 @@ from pyquats.qtools import rotate2
 from pyquats.qtools import rotate3
 from pyquats.qtools import random_quat_uniax
 from pyquats.qtools import random_quat_biax
+from pyquats.qtools import random_unit_quat
 from pyquats.qtools import random_quat_Xwall
 from pyquats.qtools import random_quat_Ywall
 from pyquats.qtools import random_quat_Zwall
@@ -69,18 +70,20 @@ class TestRotations(unittest.TestCase):
     def test_random_quat(self):
         uniax = random_quat_uniax()
         biax = random_quat_biax()
+        unit = random_unit_quat()
         self.assertAlmostEqual(abs(uniax), 1)
         self.assertAlmostEqual(abs(biax), 1)
+        self.assertAlmostEqual(abs(unit), 1)
 
     def test_wall(self):
         biax = random_quat_Xwall()
-        print(biax.q)
+        #print(biax.q)
         self.assertAlmostEqual(abs(biax), 1)
         biax = random_quat_Ywall()
-        print(biax.q)
+        #print(biax.q)
         self.assertAlmostEqual(abs(biax), 1)
         biax = random_quat_Zwall()
-        print(biax.q)
+        #print(biax.q)
         self.assertAlmostEqual(abs(biax), 1)
 
     def tearDown(self): pass
