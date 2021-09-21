@@ -58,11 +58,13 @@ rotZ60 = Quat.from_eulers(math.pi / 3.0, 0, 0)
 RANDOM UNIT QUATERNIONS
 
 from pyquats.qtools import random_unit_quat
+from pyquats.qtools import random_move_quat
 from pyquats.qtools import random_quat_Xwall
 from pyquats.qtools import random_quat_Ywall
 from pyquats.qtools import random_quat_Zwall
 
 unit = random_unit_quat()   # random unit quat on S^3
+unit_mc = random_move_quat(ksi=1.0)   # for Monte Carlo moves
 Xwall = random_quat_Xwall   # vector l || X
 Ywall = random_quat_Ywall   # vector l || Y
 Zwall = random_quat_Zwall   # vector l || Z

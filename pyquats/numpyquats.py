@@ -259,12 +259,12 @@ class Quat:
         if length != 1.0:
             print("not a unit vector")
             axis = [x / length for x in axis]
-        a = math.cos(angle / 2.0)
+        q0 = math.cos(angle / 2.0)
         sinus = math.sin(angle / 2.0)
-        b = axis[0] * sinus
-        c = axis[1] * sinus
-        d = axis[2] * sinus
-        return cls(a, b, c, d)
+        q1 = axis[0] * sinus
+        q2 = axis[1] * sinus
+        q3 = axis[2] * sinus
+        return cls(q0, q1, q2, q3)
 
     @classmethod
     def from_x_rotation(cls, angle):

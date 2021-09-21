@@ -3,12 +3,17 @@
 import math
 import numpy
 from pyquats.quats import Quat
+from pyquats.qtools import random_move_quat
 
 #unit_quat = Quat.from_x_rotation(math.pi)
 #unit_quat = Quat.from_y_rotation(math.pi / 2.)
+#unit_quat = Quat.from_x_rotation(math.pi * 0.5) * Quat.from_y_rotation(math.pi * 0.5) # n||x, l||y
+#unit_quat = Quat.from_y_rotation(math.pi * 0.5) * Quat.from_x_rotation(math.pi * 0.5) # n||-y, l||-z
+#unit_quat = Quat.from_z_rotation(math.pi / 2.)
 #unit_quat = Quat.from_z_rotation(math.pi / 6.)
 #unit_quat = Quat.from_z_rotation(math.pi / 6.) * Quat.from_y_rotation(math.pi / 2.)
-unit_quat = Quat.from_z_rotation(math.pi / 4.) * Quat.from_y_rotation(math.pi / 2.)
+#unit_quat = Quat.from_z_rotation(math.pi / 4.) * Quat.from_y_rotation(math.pi / 2.)
+unit_quat = random_move_quat(0.5)
 
 q0, q1, q2, q3 = unit_quat.q
 

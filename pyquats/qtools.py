@@ -91,4 +91,23 @@ def random_unit_quat():
     a = math.sqrt((1.0 - S1) / S2)
     return Quat(s1, s2, s3 * a, s4 * a)
 
+def random_move_quat(ksi=1.0):
+    """A Monte Carlo move (Barker, Watts, 1969)."""
+    assert 0.0 <= ksi <= 1.0
+    s1, s2 = random_pair()
+    S = s1 * s1 + s2 * s2
+    q1 = 2 * s1 * math.sqrt(1-S)
+    q2 = 2 * s2 * math.sqrt(1-S)
+    q3 = 1 - 2 * S
+    # [q1, q2, q3] is now a unit vector.
+    angle = random.uniform(-1, 1) * math.pi * 0.5 * 0.5 * ksi
+    # math.pi * 0.5 gives all rotations,
+    # 0.5 is for quat cos(angle/2), sin(angle/2).
+    q0 = math.cos(angle)
+    sinus = math.sin(angle)
+    q1 *= sinus
+    q2 *= sinus
+    q3 *= sinus
+    return Quat(q0, q1, q2, q3)
+
 # EOF
