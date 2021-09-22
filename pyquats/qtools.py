@@ -92,7 +92,7 @@ def random_unit_quat():
     return Quat(s1, s2, s3 * a, s4 * a)
 
 def random_move_quat(ksi=1.0):
-    """A Monte Carlo move (Barker, Watts, 1969)."""
+    """Return a Monte Carlo move (Barker, Watts, 1969)."""
     assert 0.0 <= ksi <= 1.0
     s1, s2 = random_pair()
     S = s1 * s1 + s2 * s2
@@ -109,5 +109,29 @@ def random_move_quat(ksi=1.0):
     q2 *= sinus
     q3 *= sinus
     return Quat(q0, q1, q2, q3)
+
+def random_move_Xwall(ksi=1.0):
+    """Return a Monte Carlo move at a X wall."""
+    # For biaxial molecules ksi=0.5 gives the same as ksi=1.0.
+    # ksi=0.25 is better for low temperatures.
+    alpha = random.uniform(-1, 1) * math.pi * ksi
+    quat = Quat.from_x_rotation(alpha)
+    return quat
+
+def random_move_Ywall(ksi=1.0):
+    """Return a Monte Carlo move at a Y wall."""
+    # For biaxial molecules ksi=0.5 gives the same as ksi=1.0.
+    # ksi=0.25 is better for low temperatures.
+    alpha = random.uniform(-1, 1) * math.pi * ksi
+    quat = Quat.from_y_rotation(alpha)
+    return quat
+
+def random_move_Zwall(ksi=1.0):
+    """Return a Monte Carlo move at a Z wall."""
+    # For biaxial molecules ksi=0.5 gives the same as ksi=1.0.
+    # ksi=0.25 is better for low temperatures.
+    alpha = random.uniform(-1, 1) * math.pi * ksi
+    quat = Quat.from_z_rotation(alpha)
+    return quat
 
 # EOF

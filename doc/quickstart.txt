@@ -62,12 +62,20 @@ from pyquats.qtools import random_move_quat
 from pyquats.qtools import random_quat_Xwall
 from pyquats.qtools import random_quat_Ywall
 from pyquats.qtools import random_quat_Zwall
+from pyquats.qtools import random_move_Xwall
+from pyquats.qtools import random_move_Ywall
+from pyquats.qtools import random_move_Zwall
 
 unit = random_unit_quat()   # random unit quat on S^3
-unit_mc = random_move_quat(ksi=1.0)   # for Monte Carlo moves
 Xwall = random_quat_Xwall   # vector l || X
 Ywall = random_quat_Ywall   # vector l || Y
 Zwall = random_quat_Zwall   # vector l || Z
+
+# for Monte Carlo moves
+unit_new = random_move_quat(ksi=0.5) * unit
+Xwall_new = random_move_Xwall(ksi=0.25) * Xwall
+Ywall_new = random_move_Ywall(ksi=0.25) * Ywall
+Zwall_new = random_move_Xwall(ksi=0.25) * Zwall
 ----------------------------------------------------------------------
 MATHEMATICAL FUNCTIONS FOR QUATERNIONS
 

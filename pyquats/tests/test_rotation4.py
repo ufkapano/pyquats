@@ -4,6 +4,9 @@ import math
 import numpy
 from pyquats.quats import Quat
 from pyquats.qtools import random_move_quat
+from pyquats.qtools import random_move_Xwall
+from pyquats.qtools import random_move_Ywall
+from pyquats.qtools import random_move_Zwall
 
 #unit_quat = Quat.from_x_rotation(math.pi)
 #unit_quat = Quat.from_y_rotation(math.pi / 2.)
@@ -13,7 +16,8 @@ from pyquats.qtools import random_move_quat
 #unit_quat = Quat.from_z_rotation(math.pi / 6.)
 #unit_quat = Quat.from_z_rotation(math.pi / 6.) * Quat.from_y_rotation(math.pi / 2.)
 #unit_quat = Quat.from_z_rotation(math.pi / 4.) * Quat.from_y_rotation(math.pi / 2.)
-unit_quat = random_move_quat(0.5)
+#unit_quat = random_move_quat(0.5)
+unit_quat = random_move_Zwall(0.5)
 
 q0, q1, q2, q3 = unit_quat.q
 
