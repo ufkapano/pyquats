@@ -28,7 +28,7 @@ class Quat:
         return self.q[key]
 
     def _normalize(self, other):
-        """Transformation to a quaternion."""
+        """Transformation of an object to a quaternion."""
         if isinstance(other, real_types):
             other = Quat(other)
         elif isinstance(other, complex):
