@@ -2,7 +2,7 @@ QUICK START
 ----------------------------------------------------------------------
 INSTALLING AN OFFICIAL RELEASE
 
-Requires: Python 2.7 or Python >= 3.7, numpy
+Requires: Python >= 3.7, numpy
 
 python -m pip install --upgrade pip
 python -m pip install pyquats

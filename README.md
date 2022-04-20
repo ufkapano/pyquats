@@ -1,7 +1,6 @@
 # pyquats
 
 Python implementation of quaternions is presented. 
-The code is written with Python 2.7 and Python 3.7.
 
 ## Modules
 

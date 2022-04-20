@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Proba wykorzystania numpy do budowy kwaternionow.
 # Trzeba porownac szybkosc dzialania obu implementacji.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Przyklad jednoczesnego sortowania wartosci wlasnych i wektorow wlasnych.
 # The eigenvalues are not necessarily ordered.
