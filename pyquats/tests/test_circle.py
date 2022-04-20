@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Testowanie rozkladu S = s1*s1 + s2*s2, kiedy s1, s2 maja rozklad
 # jednorodny w przedziale (-1,1).

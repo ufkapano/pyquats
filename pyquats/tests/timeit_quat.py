@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Results for N = 1000000
 #
@@ -12,8 +12,8 @@
 
 import random
 import timeit
-#from pyquats.quats import Quat
-from pyquats.numpyquats import Quat
+from pyquats.quats import Quat
+#from pyquats.numpyquats import Quat
 
 N = 1000000
 
