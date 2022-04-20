@@ -5,11 +5,11 @@ The code is written with Python 2.7 and Python 3.7.
 
 ## Modules
 
-* quats - Quat class
-* numpyquats - Quat class using numpy (slow)
-* qmath - mathematical functions for quaternions
+* pyquats.quats - Quat class
+* pyquats.numpyquats - Quat class using numpy (slow)
+* pyquats.qmath - mathematical functions for quaternions
 [exp(q), log(c), sin(q), cos(q), sinh(q), cosh(q)]
-* qtools - rotations, random unit quaternions
+* pyquats.qtools - rotations, random unit quaternions
 
 ## References
 

@@ -1,22 +1,26 @@
 QUICK START
 ----------------------------------------------------------------------
-INSTALLATION IN LINUX WITH PYTHON AND GIT INSTALLED
+INSTALLING AN OFFICIAL RELEASE
 
-1. Clone the project into the home directory
+Requires: Python 2.7 or Python >= 3.7, numpy
 
-$ cd
-$ git clone https://github.com/ufkapano/pyquats.git
+python -m pip install --upgrade pip
+python -m pip install pyquats
+----------------------------------------------------------------------
+INSTALLING FROM SOURCE
 
-2. Add the 'pyquats' directory to the PYTHONPATH environment variable,
-for .bashrc file you can add:
+1. Clone the project into the git repository
 
-if [ -n "${PYTHONPATH}" ] ; then
-    PYTHONPATH="${PYTHONPATH}:$HOME/pyquats"
-else
-    PYTHONPATH="$HOME/pyquats"
-fi
+git clone https://github.com/ufkapano/pyquats.git
 
-3. Start using quaternions!
+2. Install the package in the editable mode
+
+cd pyquats
+python -m pip install -e .
+
+3. You can update the package any time
+
+git pull
 ----------------------------------------------------------------------
 QUATERNIONS
 
