@@ -1,10 +1,11 @@
 # This file tells git what files to ignore.
 
-# Regular Python bytecode files.
-*.pyc
+# Some Python files.
+*.py[cod]
 
-# Optimized Python bytecode files.
-*.pyo
+# Build files.
+dist/*
+pyquats.egg-info/*
 
 # Auxiliary LaTeX files.
 *.dvi
