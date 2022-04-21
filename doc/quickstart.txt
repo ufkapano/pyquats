@@ -31,6 +31,7 @@ from pyquats.quats import Quat
 c = 5 + 6J             # complex
 q = Quat(1, 2, 3, 4)   # quaternion
 p = Quat(5.0, 2.5, 3.6, 4.9)   # quaternion
+list(p)   # [5.0, 2.5, 3.6, 4.9]
 
 p == q, p != q   # comparisons
 +q, -q
