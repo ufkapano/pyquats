@@ -5,9 +5,9 @@
 
 try:
     real_types = (int, long, float)
+    range = xrange
 except NameError:   # Python 3
     real_types = (int, float)
-    xrange = range
 
 import math
 import numpy as np
