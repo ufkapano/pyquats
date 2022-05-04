@@ -1,4 +1,4 @@
-# pyquats
+# pyquats package
 
 Python implementation of quaternions is presented. 
 
@@ -14,7 +14,7 @@ Python implementation of quaternions is presented.
 
 To install an official release do
 
-    python -m pip install pyquats
+    python3 -m pip install pyquats
 
 To get the git version do
 

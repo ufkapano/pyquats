@@ -4,8 +4,8 @@ INSTALLING AN OFFICIAL RELEASE
 
 Requires: Python >= 3.7, numpy
 
-python -m pip install --upgrade pip
-python -m pip install pyquats
+python3 -m pip install --upgrade pip
+python3 -m pip install pyquats
 ----------------------------------------------------------------------
 INSTALLING FROM SOURCE
 
@@ -16,7 +16,7 @@ git clone https://github.com/ufkapano/pyquats.git
 2. Install the package in the editable mode
 
 cd pyquats
-python -m pip install -e .
+python3 -m pip install -e .
 
 3. You can update the package any time
 
