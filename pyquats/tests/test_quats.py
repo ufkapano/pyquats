@@ -132,6 +132,16 @@ class TestQuat(unittest.TestCase):
         self.assertAlmostEqual(Quat.from_eulers(math.pi, 0, 0), self.kk)
         self.assertAlmostEqual(Quat.from_eulers(0, 0, math.pi), self.kk)
 
+    def test_random_quat(self):
+        uniax = Quat.random_quat_uniax()
+        biax = Quat.random_quat_biax()
+        unit = Quat.random_unit_quat()
+        move = Quat.random_move_quat(0.5)
+        self.assertAlmostEqual(abs(uniax), 1)
+        self.assertAlmostEqual(abs(biax), 1)
+        self.assertAlmostEqual(abs(unit), 1)
+        self.assertAlmostEqual(abs(move), 1)
+
     def tearDown(self): pass
 
 if __name__== "__main__":

@@ -10,6 +10,7 @@ except NameError:   # Python 3
     real_types = (int, float)
 
 import math
+import random
 import numpy as np
 
 class Quat:
@@ -17,7 +18,7 @@ class Quat:
 
     def __init__(self, x=0, y=0, z=0, t=0):
         """Create a Quat instance."""
-        self.q = np.array([x, y, z, t], dtype=float)
+        self.q = np.array([x, y, z, t], dtype=np.float64)
 
     def __repr__(self):
         """Compute the string (formal) representation of the quaternion."""
@@ -242,7 +243,7 @@ class Quat:
             [m10, m11, m12, 0.],
             [m20, m21, m22, 0.],
             [0., 0., 0., 1.]
-        ], dtype=float)
+        ], dtype=np.float64)
 
     # method used to create a rotation Quaternion to rotate
     # any vector defined as a Quaternion
@@ -293,6 +294,65 @@ class Quat:
         unit_quat *= cls.from_y_rotation(theta)
         unit_quat *= cls.from_z_rotation(psi)
         return unit_quat
+
+    @classmethod
+    def random_quat_uniax(cls):
+        """Return a random rotation quat for uniaxial molecules."""
+        phi = random.uniform(0, 2*math.pi)
+        ct = random.uniform(-1, 1)
+        theta = math.acos(ct)   # mozna tez -ct
+        quat = cls.from_eulers(phi, theta, 0)
+        return quat
+
+    @classmethod
+    def random_quat_biax(cls):
+        """Return a random rotation quat for biaxial molecules."""
+        phi = random.uniform(0, 2*math.pi)
+        ct = random.uniform(-1, 1)
+        theta = math.acos(ct)   # mozna tez -ct
+        psi = random.uniform(0, 2*math.pi)
+        quat = cls.from_eulers(phi, theta, psi)
+        return quat
+
+    @staticmethod
+    def random_pair():
+        """Return a random pair (s1, s2), where s1^2 + s2^2 < 1."""
+        while True:
+            s1 = random.uniform(-1, 1)
+            s2 = random.uniform(-1, 1)
+            if s1 * s1 + s2 * s2 < 1:
+                break
+        return s1, s2
+
+    @classmethod
+    def random_unit_quat(cls):
+        """Return a random unit quat (Marsaglia, 1972)."""
+        s1, s2 = cls.random_pair()
+        s3, s4 = cls.random_pair()
+        S1 = s1 * s1 + s2 * s2
+        S2 = s3 * s3 + s4 * s4
+        a = math.sqrt((1.0 - S1) / S2)
+        return cls(s1, s2, s3 * a, s4 * a)
+
+    @classmethod
+    def random_move_quat(cls, ksi=1.0):
+        """Return a Monte Carlo move (Barker, Watts, 1969)."""
+        assert 0.0 <= ksi <= 1.0
+        s1, s2 = cls.random_pair()
+        S = s1 * s1 + s2 * s2
+        q1 = 2 * s1 * math.sqrt(1-S)
+        q2 = 2 * s2 * math.sqrt(1-S)
+        q3 = 1 - 2 * S
+        # [q1, q2, q3] is now a unit vector.
+        angle = random.uniform(-1, 1) * math.pi * 0.5 * 0.5 * ksi
+        # math.pi * 0.5 gives all rotations,
+        # 0.5 is for quat cos(angle/2), sin(angle/2).
+        q0 = math.cos(angle)
+        sinus = math.sin(angle)
+        q1 *= sinus
+        q2 *= sinus
+        q3 *= sinus
+        return cls(q0, q1, q2, q3)
 
 Quaternion = Quat
 
