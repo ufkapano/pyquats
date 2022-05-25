@@ -27,6 +27,20 @@ print ( "Testing Quat (invert)..." )
 t1 = timeit.Timer(lambda: [~q for q in b])
 print ( "{} {}".format(N, t1.timeit(1)) )   # single run
 
+print ( "Testing Quat (conjugate)..." )
+t1 = timeit.Timer(lambda: [q.conjugate() for q in b])
+print ( "{} {}".format(N, t1.timeit(1)) )   # single run
+
+print ( "Testing Quat (neg)..." )
+t1 = timeit.Timer(lambda: [-q for q in b])
+print ( "{} {}".format(N, t1.timeit(1)) )   # single run
+
+print(functools.reduce(lambda x,y: x-y, b, Quat(0)))
+
+print ( "Testing Quat (neg+reduce)..." )
+t1 = timeit.Timer(lambda: functools.reduce(lambda x,y: x-y, b, Quat(0)))
+print ( "{} {}".format(N, t1.timeit(1)) )   # single run
+
 print(functools.reduce(lambda x,y: x*y, b, Quat(1)))
 
 print ( "Testing Quat (mul+reduce)..." )
