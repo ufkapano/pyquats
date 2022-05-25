@@ -54,15 +54,13 @@ class Quat:
 
     def __neg__(self):
         """Implementation of -q."""
-        #alist = [-item for item in self.q]
-        #return Quat(*alist)
         return Quat(-self.q[0], -self.q[1], -self.q[2], -self.q[3])
 
     def __add__(self, other):
         """Addition of quaternions."""
         other = self._normalize(other)
-        alist = [self.q[i] + other.q[i] for i in range(4)]
-        return Quat(*alist)
+        return Quat(self.q[0] + other.q[0], self.q[1] + other.q[1],
+            self.q[2] + other.q[2], self.q[3] + other.q[3])
 
     __radd__ = __add__
 
@@ -70,15 +68,15 @@ class Quat:
         """Subtraction of quaternions."""
         # return self + (-other)
         other = self._normalize(other)
-        alist = [self.q[i] - other.q[i] for i in range(4)]
-        return Quat(*alist)
+        return Quat(self.q[0] - other.q[0], self.q[1] - other.q[1],
+            self.q[2] - other.q[2], self.q[3] - other.q[3])
 
     def __rsub__(self, other):
         """Subtraction of quaternions."""
         # return (-self) + other
         other = self._normalize(other)
-        alist = [other.q[i] - self.q[i] for i in range(4)]
-        return Quat(*alist)
+        return Quat(other.q[0] - self.q[0], other.q[1] - self.q[1],
+            other.q[2] - self.q[2], other.q[3] - self.q[3])
 
     def __mul__(self, other):
         """Quaternion product."""
@@ -120,8 +118,7 @@ class Quat:
     def normalized(self):
         """Return a normalized version of this quaternion."""
         a = abs(self)
-        alist = [item / a for item in self.q]
-        return Quat(*alist)
+        return Quat(self.q[0] / a, self.q[1] / a, self.q[2] / a, self.q[3] / a)
 
     def is_unit(self):
         """Test a unit quaternion."""
