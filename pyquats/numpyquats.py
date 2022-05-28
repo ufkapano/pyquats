@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-#
-# Proba wykorzystania numpy do budowy kwaternionow.
-# Trzeba porownac szybkosc dzialania obu implementacji.
 
 try:
     real_types = (int, long, float)
@@ -9,7 +6,6 @@ try:
 except NameError:   # Python 3
     real_types = (int, float)
 
-import math
 import random
 import numpy as np
 
@@ -115,7 +111,7 @@ class Quat:
     def __abs__(self):
         """Return the norm of a quaternion (a scalar)."""
         powers = np.dot(self.q, self.q) # iloczyn skalarny
-        return math.sqrt(powers)
+        return np.sqrt(powers)
 
     norm = __abs__
 
@@ -141,6 +137,7 @@ class Quat:
     def __invert__(self):   # ~p, return p^{-1}
         """Reciprocal of the quaternion."""
         powers = np.dot(self.q, self.q)
+        #powers = np.sum(self.q * self.q)   # slower without numba
         return (1.0 / powers) * self.conjugate()
 
     def _pow1(self, n):
@@ -261,12 +258,12 @@ class Quat:
         The angle is in radians. The axis is a unit vector 3D."""
         if len(axis) != 3:
             raise ValueError("not a 3D vector")
-        length = math.sqrt(sum(x * x for x in axis))
+        length = np.sqrt(sum(x * x for x in axis))
         if length != 1.0:
             print("not a unit vector")
             axis = [x / length for x in axis]
-        q0 = math.cos(angle / 2.0)
-        sinus = math.sin(angle / 2.0)
+        q0 = np.cos(angle / 2.0)
+        sinus = np.sin(angle / 2.0)
         q1 = axis[0] * sinus
         q2 = axis[1] * sinus
         q3 = axis[2] * sinus
@@ -303,19 +300,19 @@ class Quat:
     @classmethod
     def random_quat_uniax(cls):
         """Return a random rotation quat for uniaxial molecules."""
-        phi = random.uniform(0, 2*math.pi)
+        phi = random.uniform(0, 2*np.pi)
         ct = random.uniform(-1, 1)
-        theta = math.acos(ct)   # mozna tez -ct
+        theta = np.arccos(ct)   # mozna tez -ct
         quat = cls.from_eulers(phi, theta, 0)
         return quat
 
     @classmethod
     def random_quat_biax(cls):
         """Return a random rotation quat for biaxial molecules."""
-        phi = random.uniform(0, 2*math.pi)
+        phi = random.uniform(0, 2*np.pi)
         ct = random.uniform(-1, 1)
-        theta = math.acos(ct)   # mozna tez -ct
-        psi = random.uniform(0, 2*math.pi)
+        theta = np.arccos(ct)   # mozna tez -ct
+        psi = random.uniform(0, 2*np.pi)
         quat = cls.from_eulers(phi, theta, psi)
         return quat
 
@@ -336,7 +333,7 @@ class Quat:
         s3, s4 = cls.random_pair()
         S1 = s1 * s1 + s2 * s2
         S2 = s3 * s3 + s4 * s4
-        a = math.sqrt((1.0 - S1) / S2)
+        a = np.sqrt((1.0 - S1) / S2)
         return cls(s1, s2, s3 * a, s4 * a)
 
     @classmethod
@@ -345,15 +342,15 @@ class Quat:
         assert 0.0 <= ksi <= 1.0
         s1, s2 = cls.random_pair()
         S = s1 * s1 + s2 * s2
-        q1 = 2 * s1 * math.sqrt(1-S)
-        q2 = 2 * s2 * math.sqrt(1-S)
+        q1 = 2 * s1 * np.sqrt(1-S)
+        q2 = 2 * s2 * np.sqrt(1-S)
         q3 = 1 - 2 * S
         # [q1, q2, q3] is now a unit vector.
-        angle = random.uniform(-1, 1) * math.pi * 0.5 * 0.5 * ksi
-        # math.pi * 0.5 gives all rotations,
+        angle = random.uniform(-1, 1) * np.pi * 0.5 * 0.5 * ksi
+        # np.pi * 0.5 gives all rotations,
         # 0.5 is for quat cos(angle/2), sin(angle/2).
-        q0 = math.cos(angle)
-        sinus = math.sin(angle)
+        q0 = np.cos(angle)
+        sinus = np.sin(angle)
         q1 *= sinus
         q2 *= sinus
         q3 *= sinus

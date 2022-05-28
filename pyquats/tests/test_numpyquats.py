@@ -2,7 +2,7 @@
 
 import sys
 import unittest
-import math
+import numpy as np
 from pyquats.numpyquats import Quat
 
 
@@ -123,14 +123,14 @@ class TestQuat(unittest.TestCase):
         self.assertEqual(len(aset), 3)
 
     def test_from_rotations(self):
-        self.assertAlmostEqual(Quat.from_x_rotation(math.pi), self.ii)
-        self.assertAlmostEqual(Quat.from_y_rotation(math.pi), self.jj)
-        self.assertAlmostEqual(Quat.from_z_rotation(math.pi), self.kk)
+        self.assertAlmostEqual(Quat.from_x_rotation(np.pi), self.ii)
+        self.assertAlmostEqual(Quat.from_y_rotation(np.pi), self.jj)
+        self.assertAlmostEqual(Quat.from_z_rotation(np.pi), self.kk)
 
     def test_from_eulers(self):
-        self.assertAlmostEqual(Quat.from_eulers(0, math.pi, 0), self.jj)
-        self.assertAlmostEqual(Quat.from_eulers(math.pi, 0, 0), self.kk)
-        self.assertAlmostEqual(Quat.from_eulers(0, 0, math.pi), self.kk)
+        self.assertAlmostEqual(Quat.from_eulers(0, np.pi, 0), self.jj)
+        self.assertAlmostEqual(Quat.from_eulers(np.pi, 0, 0), self.kk)
+        self.assertAlmostEqual(Quat.from_eulers(0, 0, np.pi), self.kk)
 
     def test_random_quat(self):
         uniax = Quat.random_quat_uniax()
