@@ -15,7 +15,7 @@ class Quat:
 
     def __init__(self, x=0, y=0, z=0, t=0):
         """Create a Quat instance."""
-        self.q = [float(x), float(y), float(z), float(t)]
+        self.q = (float(x), float(y), float(z), float(t))
 
     def __repr__(self):
         """Compute the string (formal) representation of the quaternion."""
@@ -44,7 +44,7 @@ class Quat:
 
     def __nonzero__(self):
         """Test if the quaternion is not equal to zero."""
-        return self.q != [0.0, 0.0, 0.0, 0.0]
+        return self.q != (0.0, 0.0, 0.0, 0.0)
 
     __bool__ = __nonzero__   # Python 3
 
@@ -81,39 +81,39 @@ class Quat:
     def __mul__(self, other):
         """Quaternion product."""
         other = self._normalize(other)
-        a = (self.q[0] * other.q[0] - self.q[1] * other.q[1]
+        q0 = (self.q[0] * other.q[0] - self.q[1] * other.q[1]
             - self.q[2] * other.q[2] - self.q[3] * other.q[3])
-        b = (self.q[0] * other.q[1] + self.q[1] * other.q[0]
+        q1 = (self.q[0] * other.q[1] + self.q[1] * other.q[0]
             + self.q[2] * other.q[3] - self.q[3] * other.q[2])
-        c = (self.q[0] * other.q[2] - self.q[1] * other.q[3]
+        q2 = (self.q[0] * other.q[2] - self.q[1] * other.q[3]
             + self.q[2] * other.q[0] + self.q[3] * other.q[1])
-        d = (self.q[0] * other.q[3] + self.q[1] * other.q[2]
+        q3 = (self.q[0] * other.q[3] + self.q[1] * other.q[2]
             - self.q[2] * other.q[1] + self.q[3] * other.q[0])
-        return Quat(a, b, c, d)
+        return Quat(q0, q1, q2, q3)
 
     def __rmul__(self, other):
         """Quaternion product."""
         other = self._normalize(other)
-        a = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
+        q0 = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
             - other.q[2] * self.q[2] - other.q[3] * self.q[3])
-        b = (other.q[0] * self.q[1] + other.q[1] * self.q[0]
+        q1 = (other.q[0] * self.q[1] + other.q[1] * self.q[0]
             + other.q[2] * self.q[3] - other.q[3] * self.q[2])
-        c = (other.q[0] * self.q[2] - other.q[1] * self.q[3]
+        q2 = (other.q[0] * self.q[2] - other.q[1] * self.q[3]
             + other.q[2] * self.q[0] + other.q[3] * self.q[1])
-        d = (other.q[0] * self.q[3] + other.q[1] * self.q[2]
+        q3 = (other.q[0] * self.q[3] + other.q[1] * self.q[2]
             - other.q[2] * self.q[1] + other.q[3] * self.q[0])
-        return Quat(a, b, c, d)
+        return Quat(q0, q1, q2, q3)
 
     def __abs__(self):
         """Return the norm of a quaternion (a scalar)."""
-        powers = sum(item * item for item in self.q)
+        powers = sum(x * x for x in self.q)
         return math.sqrt(powers)
 
     norm = __abs__
 
     def norm_squared(self):
         """Return the squared norm of a quaternion (a scalar)."""
-        return sum(item * item for item in self.q)
+        return sum(x * x for x in self.q)
 
     def normalized(self):
         """Return a normalized version of this quaternion."""
@@ -122,7 +122,7 @@ class Quat:
 
     def is_unit(self):
         """Test a unit quaternion."""
-        return 1.0 == sum(item * item for item in self.q)
+        return 1.0 == sum(x * x for x in self.q)
 
     def conjugate(self):
         """Conjugate the quaternion."""
@@ -130,7 +130,7 @@ class Quat:
 
     def __invert__(self):   # ~p, return p^{-1}
         """Reciprocal of the quaternion."""
-        powers = sum(item * item for item in self.q)
+        powers = sum(x * x for x in self.q)
         return (1.0 / powers) * self.conjugate()
 
     def _pow1(self, n):
@@ -171,7 +171,7 @@ class Quat:
 
     def __hash__(self):
         """Hashable quaternions."""
-        return hash(tuple(self.q))
+        return hash(self.q)
 
     def __int__(self):
         """Conversion to int is not possible."""
@@ -201,7 +201,7 @@ class Quat:
         vec_quat = Quat(0, vector[0], vector[1], vector[2])
         vec_quat = unit_quat * vec_quat * (~unit_quat)
         # zwracamy wektor z R^3 (wycinek)
-        return vec_quat.q[1:]   # list or numpy.array
+        return vec_quat.q[1:]   # list or tuple or numpy.array
 
     def get_rotation_matrix(self):
         """Return the rotation matrix."""

@@ -85,28 +85,28 @@ class Quat:
     def __mul__(self, other):
         """Quaternion product."""
         other = self._normalize(other)
-        a = (self.q[0] * other.q[0] - self.q[1] * other.q[1]
+        q0 = (self.q[0] * other.q[0] - self.q[1] * other.q[1]
             - self.q[2] * other.q[2] - self.q[3] * other.q[3])
-        b = (self.q[0] * other.q[1] + self.q[1] * other.q[0]
+        q1 = (self.q[0] * other.q[1] + self.q[1] * other.q[0]
             + self.q[2] * other.q[3] - self.q[3] * other.q[2])
-        c = (self.q[0] * other.q[2] - self.q[1] * other.q[3]
+        q2 = (self.q[0] * other.q[2] - self.q[1] * other.q[3]
             + self.q[2] * other.q[0] + self.q[3] * other.q[1])
-        d = (self.q[0] * other.q[3] + self.q[1] * other.q[2]
+        q3 = (self.q[0] * other.q[3] + self.q[1] * other.q[2]
             - self.q[2] * other.q[1] + self.q[3] * other.q[0])
-        return Quat(a, b, c, d)
+        return Quat(q0, q1, q2, q3)
 
     def __rmul__(self, other):
         """Quaternion product."""
         other = self._normalize(other)
-        a = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
+        q0 = (other.q[0] * self.q[0] - other.q[1] * self.q[1]
             - other.q[2] * self.q[2] - other.q[3] * self.q[3])
-        b = (other.q[0] * self.q[1] + other.q[1] * self.q[0]
+        q1 = (other.q[0] * self.q[1] + other.q[1] * self.q[0]
             + other.q[2] * self.q[3] - other.q[3] * self.q[2])
-        c = (other.q[0] * self.q[2] - other.q[1] * self.q[3]
+        q2 = (other.q[0] * self.q[2] - other.q[1] * self.q[3]
             + other.q[2] * self.q[0] + other.q[3] * self.q[1])
-        d = (other.q[0] * self.q[3] + other.q[1] * self.q[2]
+        q3 = (other.q[0] * self.q[3] + other.q[1] * self.q[2]
             - other.q[2] * self.q[1] + other.q[3] * self.q[0])
-        return Quat(a, b, c, d)
+        return Quat(q0, q1, q2, q3)
 
     def __abs__(self):
         """Return the norm of a quaternion (a scalar)."""
@@ -208,7 +208,7 @@ class Quat:
         vec_quat = Quat(0, vector[0], vector[1], vector[2])
         vec_quat = unit_quat * vec_quat * (~unit_quat)
         # zwracamy wektor z R^3 (wycinek)
-        return vec_quat.q[1:]   # list or numpy.array
+        return vec_quat.q[1:]   # list or tuple or numpy.array
 
     def get_rotation_matrix(self):
         """Return the rotation matrix."""
