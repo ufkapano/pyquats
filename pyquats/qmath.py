@@ -46,7 +46,10 @@ def log(x):
 
 
 def sin(x):
-    """Return the sine of x."""
+    """Return the sine of x.
+    Note that Euler's formula is used to define sin(x).
+    Other nonequivalent definitions are possible.
+    """
     if isinstance(x, real_types):
         return Quat(math.sin(x))
     elif isinstance(x, complex):
@@ -62,7 +65,10 @@ def sin(x):
 
 
 def cos(x):
-    """Return the cosine of x."""
+    """Return the cosine of x.
+    Note that Euler's formula is used to define cos(x).
+    Other nonequivalent definitions are possible.
+    """
     if isinstance(x, real_types):
         return Quat(math.cos(x))
     elif isinstance(x, complex):
@@ -86,7 +92,7 @@ def sinh(x):
         return Quat(math.sinh(x.real) * math.cos(x.imag), 
                     math.cosh(x.real) * math.sin(x.imag))
     else:   # isinstance(x, Quat)
-        # sin(q)=(exp(q)-exp(-q))/2
+        # sinh(q)=(exp(q)-exp(-q))/2
         result = exp(x) - exp(-x)
         result = result * Quat(0.5)
         return result
@@ -101,7 +107,7 @@ def cosh(x):
         return Quat(math.cosh(x.real) * math.cos(x.imag), 
                     math.sinh(x.real) * math.sin(x.imag))
     else:   # isinstance(x, Quat)
-        # cos(q)=(exp(q)+exp(-q))/2
+        # cosh(q)=(exp(q)+exp(-q))/2
         result = exp(x) + exp(-x)
         result = result * Quat(0.5)
         return result
