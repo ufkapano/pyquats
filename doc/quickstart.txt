@@ -91,6 +91,9 @@ import pyquats.qmath as qmath
 c = 5 + 6J             # complex
 q = Quat(1, 2, 3, 4)   # quaternion
 
+print ( qmath.sgn(c) )   # unit quaternion
+print ( qmath.sgn(q) )   # unit quaternion
+
 print ( qmath.exp(c) )
 print ( qmath.exp(q) )
 

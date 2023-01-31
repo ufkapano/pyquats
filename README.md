@@ -7,7 +7,7 @@ Python implementation of quaternions is presented.
 * pyquats.quats - Quat class
 * pyquats.numpyquats - Quat class using numpy (slow)
 * pyquats.qmath - mathematical functions for quaternions
-[exp(q), log(c), sin(q), cos(q), sinh(q), cosh(q)]
+[sgn(q), exp(q), log(c), sin(q), cos(q), sinh(q), cosh(q)]
 * pyquats.qtools - rotations, random unit quaternions
 
 ## Download
@@ -46,8 +46,18 @@ Quat(1.0, 0.0, -2.7755575615628914e-17, 5.551115123125783e-17)
 [5.0, 2.5, -3.6, 4.9]
 ~~~
 
+## Contributors
+
+Andrzej Kapanowski (project leader)
+
+Jan Ferdyan (quaternion functions)
+
 ## References
 
 [1] http://en.wikipedia.org/wiki/Quaternion
+
+[2] Real Quaternionic Calculus Handbook,
+João Pedro Morais, Svetlin Georgiev, Wolfgang Sprößig,
+Birkhäuser Basel 2014.
 
 EOF

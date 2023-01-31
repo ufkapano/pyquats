@@ -59,8 +59,10 @@ class Quat:
     def __add__(self, other):
         """Addition of quaternions."""
         other = self._normalize(other)
-        return Quat(self.q[0] + other.q[0], self.q[1] + other.q[1],
-            self.q[2] + other.q[2], self.q[3] + other.q[3])
+        return Quat(self.q[0] + other.q[0],
+            self.q[1] + other.q[1],
+            self.q[2] + other.q[2],
+            self.q[3] + other.q[3])
 
     __radd__ = __add__
 
@@ -68,15 +70,19 @@ class Quat:
         """Subtraction of quaternions."""
         # return self + (-other)
         other = self._normalize(other)
-        return Quat(self.q[0] - other.q[0], self.q[1] - other.q[1],
-            self.q[2] - other.q[2], self.q[3] - other.q[3])
+        return Quat(self.q[0] - other.q[0],
+            self.q[1] - other.q[1],
+            self.q[2] - other.q[2],
+            self.q[3] - other.q[3])
 
     def __rsub__(self, other):
         """Subtraction of quaternions."""
         # return (-self) + other
         other = self._normalize(other)
-        return Quat(other.q[0] - self.q[0], other.q[1] - self.q[1],
-            other.q[2] - self.q[2], other.q[3] - self.q[3])
+        return Quat(other.q[0] - self.q[0],
+            other.q[1] - self.q[1],
+            other.q[2] - self.q[2],
+            other.q[3] - self.q[3])
 
     def __mul__(self, other):
         """Quaternion product."""
@@ -263,17 +269,17 @@ class Quat:
     @classmethod
     def from_x_rotation(cls, angle):
         """Create the unit quat for the X rotation."""
-        return cls.rot_quat([1, 0, 0], angle)
+        return cls.rot_quat((1, 0, 0), angle)
 
     @classmethod
     def from_y_rotation(cls, angle):
         """Create the unit quat for the Y rotation."""
-        return cls.rot_quat([0, 1, 0], angle)
+        return cls.rot_quat((0, 1, 0), angle)
 
     @classmethod
     def from_z_rotation(cls, angle):
         """Create the unit quat for the Z rotation."""
-        return cls.rot_quat([0, 0, 1], angle)
+        return cls.rot_quat((0, 0, 1), angle)
 
     create_from_axis_rotation = rot_quat
     create_from_x_rotation = from_x_rotation

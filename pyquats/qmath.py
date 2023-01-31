@@ -11,9 +11,21 @@ import cmath
 from pyquats.quats import Quat
 #from pyquats.numpyquats import Quat
 
+def sgn(x):
+    """Return the sign of x, it is the unit quaternion for x != 0."""
+    a = abs(x)
+    if a == 0.0:
+        return Quat(0)
+    if isinstance(x, real_types):
+        return Quat(x / a)
+    elif isinstance(x, complex):
+        return Quat(x.real / a, x.imag / a)
+    else:
+        return x * Quat(1.0 / a)
+
 
 def exp(x):
-    """Return the exponential value e**x."""
+    """Return the exponential value e^x."""
     if isinstance(x, real_types):
         return Quat(math.exp(x))
     elif isinstance(x, complex):

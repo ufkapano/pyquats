@@ -15,6 +15,13 @@ class TestQuatMath(unittest.TestCase):
         self.c1 = 3J
         self.c2 = 1 + 2J
 
+    def test_sgn(self):
+        self.assertAlmostEqual(qmath.sgn(self.f1), Quat(1))
+        self.assertAlmostEqual(qmath.sgn(-5), Quat(-1))
+        self.assertAlmostEqual(qmath.sgn(self.c1), Quat(0, 1))
+        self.assertAlmostEqual(abs(qmath.sgn(self.c2)), 1.0)
+        self.assertAlmostEqual(qmath.sgn(Quat(3, 0, 4)), Quat(0.6, 0, 0.8))
+
     def test_exp(self):
         self.assertAlmostEqual(qmath.exp(self.f1), math.exp(self.f1))
         self.assertAlmostEqual(qmath.exp(self.c1), cmath.exp(self.c1))
