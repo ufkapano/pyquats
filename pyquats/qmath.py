@@ -41,7 +41,7 @@ def exp(x):
         if v == 0.0:
             result = quat_imag
         else:
-            result = quat_imag * (math.sin(v) / v)
+            result = quat_imag * Quat(math.sin(v) / v)
         result = result + Quat(math.cos(v))
         result = result * math.exp(x.q[0])
         return result
@@ -60,7 +60,6 @@ def log(x):
 def sin(x):
     """Return the sine of x.
     Note that Euler's formula is used to define sin(x).
-    Other nonequivalent definitions are possible.
     """
     if isinstance(x, real_types):
         return Quat(math.sin(x))
@@ -69,17 +68,21 @@ def sin(x):
         return Quat(math.sin(x.real) * math.cosh(x.imag), 
                     math.cos(x.real) * math.sinh(x.imag))
     else:   # isinstance(x, Quat)
-        # sin(q)=(exp(qJ)-exp(-qJ))/(2J)
-        quat = x * Quat(0, 1)
-        result = exp(quat) - exp(-quat)
-        result = result * Quat(0, -0.5)
-        return result
+        quat_imag = Quat(0, x.q[1], x.q[2], x.q[3])
+        v = abs(quat_imag)
+        if v == 0.0:
+            return Quat(math.sin(x.q[0]))
+        else:
+            quat_imag = quat_imag * Quat(1.0 / v)   # we get a unit quat
+            quat = x * quat_imag
+            result = exp(quat) - exp(-quat)
+            result = result * quat_imag * Quat(-0.5)
+            return result
 
 
 def cos(x):
     """Return the cosine of x.
     Note that Euler's formula is used to define cos(x).
-    Other nonequivalent definitions are possible.
     """
     if isinstance(x, real_types):
         return Quat(math.cos(x))
@@ -88,11 +91,16 @@ def cos(x):
         return Quat(math.cos(x.real) * math.cosh(x.imag), 
                    -math.sin(x.real) * math.sinh(x.imag))
     else:   # isinstance(x, Quat)
-        # cos(q)=(exp(qJ)+exp(-qJ))/2
-        quat = x * Quat(0, 1)
-        result = exp(quat) + exp(-quat)
-        result = result * Quat(0.5)
-        return result
+        quat_imag = Quat(0, x.q[1], x.q[2], x.q[3])
+        v = abs(quat_imag)
+        if v == 0.0:
+            return Quat(math.cos(x.q[0]))
+        else:
+            quat_imag = quat_imag * Quat(1.0 / v)   # we get a unit quat
+            quat = x * quat_imag
+            result = exp(quat) + exp(-quat)
+            result = result * Quat(0.5)
+            return result
 
 
 def sinh(x):

@@ -50,6 +50,8 @@ class TestQuatMath(unittest.TestCase):
         self.assertAlmostEqual(qmath.sin(Quat(0, 3)), cmath.sin(3J))
         self.assertAlmostEqual(qmath.sin(Quat(4, 5)), cmath.sin(4 + 5J))
         self.assertAlmostEqual(qmath.sin(Quat(0, self.f1)), Quat(0, math.sinh(self.f1)))
+        self.assertAlmostEqual(qmath.sin(Quat(0, 0, self.f1)), Quat(0, 0, math.sinh(self.f1)))
+        self.assertAlmostEqual(qmath.sin(Quat(0, 0, 0, self.f1)), Quat(0, 0, 0, math.sinh(self.f1)))
 
     def test_cos(self):
         self.assertAlmostEqual(qmath.cos(self.f1), math.cos(self.f1))
@@ -59,6 +61,8 @@ class TestQuatMath(unittest.TestCase):
         self.assertAlmostEqual(qmath.cos(Quat(0, 3)), cmath.cos(3J))
         self.assertAlmostEqual(qmath.cos(Quat(4, 5)), cmath.cos(4 + 5J))
         self.assertAlmostEqual(qmath.cos(Quat(0, self.f1)), Quat(math.cosh(self.f1)))
+        self.assertAlmostEqual(qmath.cos(Quat(0, 0, self.f1)), Quat(math.cosh(self.f1)))
+        self.assertAlmostEqual(qmath.cos(Quat(0, 0, 0, self.f1)), Quat(math.cosh(self.f1)))
 
     def test_sinh(self):
         self.assertAlmostEqual(qmath.sinh(self.f1), math.sinh(self.f1))
