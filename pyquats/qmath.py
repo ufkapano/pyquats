@@ -39,12 +39,12 @@ def exp(x):
         #if v < 1e4:
         #    result = quat_imag * (1.0 - v*v/6.0)
         if v == 0.0:
-            result = quat_imag
+            return Quat(math.exp(x.q[0]))
         else:
             result = quat_imag * Quat(math.sin(v) / v)
-        result = result + Quat(math.cos(v))
-        result = result * math.exp(x.q[0])
-        return result
+            result = result + Quat(math.cos(v))
+            result = result * math.exp(x.q[0])
+            return result
 
 
 def log(x):
